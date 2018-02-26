@@ -1,0 +1,19 @@
+
+.title{
+  align-items: center;
+  display: inline-flex;
+  width: 100%;
+}
+
+.title img{
+  height: $title-decoration-height;
+  width: $title-decoration-width;
+}
+
+.title p{
+  font-size: $text-big;
+  margin-left: -$title-decoration-width*0.34;
+}
+
+
+
