@@ -1,18 +1,20 @@
 
-.title{
+.title {
   align-items: center;
-  display: inline-flex;
-  width: 100%;
+  display: flex;
+  text-align: left;
 }
-
-.title img{
+ 
+.title::before {
+  background: url('img/triangle.svg') no-repeat 0 0;
+  content: "";
   height: $title-decoration-height;
   width: $title-decoration-width;
 }
 
-.title p{
+.title .title-text {
   font-size: $text-big;
-  margin-left: -$title-decoration-width*0.34;
+  width: 100%;
 }
 
 
