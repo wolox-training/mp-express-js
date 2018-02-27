@@ -3,12 +3,13 @@
   display:flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin:20px 13%;
 }
 
 .tech{
   border: 1px solid $green;
   border-radius: 4px;
-  flex-basis: 18%;
+  flex-basis: 17%;
   margin:20px;
 }
 
@@ -21,7 +22,7 @@
   flex-wrap: nowrap;
   flex-grow: 1;
   height: 100%;
-  padding: 10px 30px;
+  padding: 10px 20px;
   margin: 10px -10px -10px 10px;
   text-align: center;
 }
@@ -29,6 +30,7 @@
 .tech img{
   height: $tech-logo-size;
   width: $tech-logo-size;
+  margin-bottom:10px;
 }
 
 .tech p{
