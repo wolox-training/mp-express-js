@@ -1,0 +1,27 @@
+.footer {
+  align-items: center;
+  background-color: $blue;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.footer .big-phrase {
+  color: $white;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  margin: 35px 0;
+}
+
+.footer .md-phrase {
+  color: $white;
+  font-size: $text-medium;
+  margin-top: 25px;
+}
+
+.footer .copht-phrase {
+  align-self: flex-end;
+  color: $white;
+  font-size: $text-small;
+}
