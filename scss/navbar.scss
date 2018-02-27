@@ -1,0 +1,21 @@
+.nav-bar{
+  align-items: center;
+  box-shadow: 0 4px 8px 1px $grey;
+  background-color: $white;
+  display: flex;
+  justify-content: space-between;
+  height: $nav-height;
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+
+.nav-bar img{
+  height: $nav-height;
+  padding: 20px;
+}
+
+.nav-bar p{
+  font-size: $text-big;
+  padding: 20px;
+}
