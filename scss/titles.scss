@@ -2,7 +2,9 @@
 .title {
   align-items: center;
   display: flex;
+  font-size: $text-big;
   text-align: left;
+  width: 100%;
 }
  
 .title::before {
@@ -11,11 +13,3 @@
   height: $title-decoration-height;
   width: $title-decoration-width;
 }
-
-.title .title-text {
-  font-size: $text-big;
-  width: 100%;
-}
-
-
-
