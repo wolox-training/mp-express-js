@@ -1,15 +1,8 @@
-$nav-height: 90px;
-$title-decoration-height: 90px;
-$title-decoration-width: 100px;
-$tech-logo-size: 100px;
-$text-big: 24px;
-$text-medium: 16px;
-$text-small: 12px;
-$font:'Roboto';
-
-.lyt-container{
+.lyt-container {
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   margin-top: $nav-height;
+  padding: 80px 0; 
 }
