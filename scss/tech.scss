@@ -18,35 +18,34 @@
   width: $card-size;
   &::before {
     content: '';
-    bottom: 10px;
     border: 1px solid $green;
     border-radius: 4px;
-    left: -10px;
+    height: 100%;
     position: absolute;
     right: 10px;
     top: -10px;
+    width: $card-size;
   }
 }
 
-.tech .tech-img {
+.tech-img {
   height: $tech-logo-size;
   width: $tech-logo-size;
 }
 
-.tech .tech-text {
-  font-family: $font;
+.tech-text {
   font-size: $text-medium;
 }
 
-.tech .tech-text-last {
+.tech-text-last {
   font-size: $text-small; 
 }
 
-.tech .tech-text-title {
+.tech-text-title {
   margin-bottom: 10px;
 }
 
-.tech .tech-text-release {
+.tech-text-release {
   font-weight: bold;
   margin-bottom: 20px;
 }
