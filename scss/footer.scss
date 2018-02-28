@@ -6,22 +6,25 @@
   padding: 20px;
 }
 
-.footer .big-phrase {
+%footer-phrase {
   color: $white;
+}
+
+.big-phrase {
+  @extend %footer-phrase;
   font-size: 60px;
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
   margin: 35px 0;
 }
 
-.footer .md-phrase {
-  color: $white;
+.md-phrase {
+  @extend %footer-phrase;
   font-size: $text-medium;
   margin-top: 25px;
 }
 
-.footer .copht-phrase {
+.copht-phrase {
+  @extend %footer-phrase;
   align-self: flex-end;
-  color: $white;
   font-size: $text-small;
 }
