@@ -22,7 +22,7 @@
     justify-self: end;
   }
 
-  &:nth-child(even):after{
+  &:nth-child(even):after {
     border-left: 2px solid $green;
     content: '';
     height: 100%;
