@@ -1,10 +1,10 @@
 
 .title {
   align-items: center;
+  justify-self: start;
   display: flex;
   font-size: $text-big;
   max-width: $content-size;
-  width: 100%;
 
   &::before {
     background: url('img/triangle.svg') no-repeat 0 0;
