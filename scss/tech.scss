@@ -40,3 +40,20 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: $responsive-breakpoint) {
+
+  .techs-container {
+    grid-template-columns: repeat(1, max-content);
+    justify-content: center;
+  }
+
+  .tech {
+    border-top: 2px solid $green;
+
+    &:first-child {
+      border: none;
+    }
+  }
+
+}

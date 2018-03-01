@@ -20,3 +20,11 @@
 .nav-bar-text {
   font-size: $text-big;
 }
+
+@media screen and (max-width: $responsive-breakpoint) {
+
+  .nav-bar-text {
+    display: none;
+  }
+
+}

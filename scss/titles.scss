@@ -18,3 +18,12 @@
   }
   
 }
+
+@media screen and (max-width: $responsive-breakpoint) {
+
+  .title {
+    align-self: center;
+    margin-left: -40px;
+  }
+
+}
