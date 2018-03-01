@@ -1,9 +1,7 @@
 
 .techs-container {
   display: grid;
-  grid-template-areas: 
-    "main-tech tech tech"
-    "main-tech tech tech";
+  grid-template-columns: repeat(3, max-content);
   width: $content-size;
 }
 
@@ -11,25 +9,17 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 30px 30px;
+  padding: 30px;
   position: relative;
   text-align: center;
   width: $card-size;
   
   &:first-child {
-    align-self: center;
-    grid-area: main-tech;
-    justify-self: end;
+    border-right: 2px solid $green;
+    grid-row: 1/3;
+    justify-content: center;
   }
 
-  &:nth-child(even):after {
-    border-left: 2px solid $green;
-    content: '';
-    height: 100%;
-    position: absolute;
-    width: $card-size;
-    top: -20px;
-  }
 }
 
 .tech-img {
