@@ -28,3 +28,11 @@
   align-self: flex-end;
   font-size: $text-small;
 }
+
+@media screen and (max-width: $responsive-breakpoint) {
+
+  .copht-phrase {
+    align-self: center;
+  }
+
+}
