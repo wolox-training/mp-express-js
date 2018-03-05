@@ -1,0 +1,29 @@
+
+.title {
+  align-self: start;
+  align-items: center;
+  display: flex;
+  font-size: $text-big;
+  margin: 40px 68px;
+  max-width: $content-size;
+
+  &::before {
+    background: url('img/triangle.svg') no-repeat 0 0;
+    content: '';
+    height: $title-decoration-height;
+    left: 18px;
+    position: relative;
+    width: $title-decoration-width;
+    z-index: -1;
+  }
+  
+}
+
+@media screen and (max-width: $responsive-breakpoint) {
+
+  .title {
+    align-self: center;
+    margin-left: -40px;
+  }
+
+}
