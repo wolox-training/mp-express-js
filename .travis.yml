@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "6.0"
+  - "8.9.4"
 
 sudo: true
 
@@ -19,3 +19,8 @@ services:
 
 before_script:
   - psql -c "CREATE DATABASE bookstest;" -U postgres
+
+script:
+  - cd training-node
+  - npm install
+  - npm test
