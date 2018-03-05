@@ -19,7 +19,7 @@ services:
 
 before_script:
   - psql -c "CREATE DATABASE bookstest;" -U postgres
-  - training-node/node_modules/.bin/sequelize db:migrate
+  - cd training-node && node_modules/.bin/sequelize db:migrate
 
 script:
   - npm run lint
