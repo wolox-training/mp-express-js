@@ -22,4 +22,5 @@ before_script:
 
 script:
   - cd training-node
+  - npm install
   - npm test
