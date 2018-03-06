@@ -11,7 +11,7 @@ exports.validate = (request, response, next) => {
     : {};
 
   if (!(user.name && user.lastName && user.email && user.password)) {
-    next(errors.savingError('Body request must contain name, lastName, email and password'));
+    next(errors.badRequest('Body request must contain name, lastName, email and password'));
   } else {
     request.user = user;
     next();

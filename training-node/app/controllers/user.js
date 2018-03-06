@@ -1,7 +1,8 @@
 const userServices = require('../services/user'),
   logger = require('../logger'),
   errors = require('../errors'),
-  bcrypt = require('bcrypt');
+  bcrypt = require('bcrypt'),
+  tokenManager = require('../services/tokenManager');
 
 const validateUser = user => {
   const validation = {
@@ -48,8 +49,43 @@ exports.create = (request, response, next) => {
             next(err);
           });
       } else {
-        next(errors.savingError(validation.message));
+        next(errors.badRequest(validation.message));
       }
     })
     .catch(error => errors.defaultError(error));
+};
+
+exports.login = (request, response, next) => {
+  const userData = request.body
+    ? {
+        email: request.body.email,
+        password: request.body.password
+      }
+    : {};
+  const validation = validateUser(userData);
+
+  if (validation.isValid) {
+    userServices
+      .findByEmail(userData.email)
+      .then(user => {
+        if (user === null) {
+          throw errors.badRequest(`User not found ${userData.email}`);
+        }
+        return user;
+      })
+      .then(user => {
+        const same = bcrypt.compareSync(userData.password, user.password);
+        if (same) {
+          const token = tokenManager.encode(userData.email);
+          response.status(200);
+          response.set(tokenManager.HEADER_NAME, token);
+          response.end();
+        } else {
+          throw errors.badRequest(`Invalid password for user ${userData.email}`);
+        }
+      })
+      .catch(next);
+  } else {
+    next(errors.badRequest(validation.message));
+  }
 };
