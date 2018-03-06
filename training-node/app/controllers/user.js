@@ -63,7 +63,7 @@ exports.login = (request, response, next) => {
       }
     : {};
   const validation = validateUser(userData);
-
+  logger.info(`Attempt login for user ${userData.email}`);
   if (validation.isValid) {
     userServices
       .findByEmail(userData.email)
@@ -76,6 +76,7 @@ exports.login = (request, response, next) => {
       .then(user => {
         const same = bcrypt.compareSync(userData.password, user.password);
         if (same) {
+          logger.info(`Success login for user ${userData.email}`);
           const token = tokenManager.encode(userData.email);
           response.status(200);
           response.set(tokenManager.HEADER_NAME, token);
