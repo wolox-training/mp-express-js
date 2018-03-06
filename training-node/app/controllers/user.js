@@ -20,9 +20,9 @@ const validateUser = user =>
   });
 
 exports.create = (request, response, next) => {
-  const saltRounds = 10;
+  const SALT_ROUNDS = 10;
   bcrypt
-    .hash(request.user.password, saltRounds)
+    .hash(request.user.password, SALT_ROUNDS)
     .then(hashPass => {
       request.user.password = hashPass;
       validateUser(request.user)
