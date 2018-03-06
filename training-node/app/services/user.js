@@ -4,11 +4,11 @@ const User = require('../models').users,
   Sequelize = require('sequelize');
 
 exports.create = user =>
-  User.create(user)
-    .catch(Sequelize.ValidationError, e => {
+  User.create(user).catch(e => {
+    if (e instanceof Sequelize.ValidationError) {
       throw errors.savingError(e.errors);
-    })
-    .catch(Sequelize.Error, e => {
+    } else {
       logger.error('Database error', e);
       throw errors.defaultError('Database error');
-    });
+    }
+  });
