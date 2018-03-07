@@ -27,7 +27,7 @@ const validateLogin = user => {
 
 exports.create = (request, response, next) => {
   const SALT_ROUNDS = 10;
-  bcrypt
+  return bcrypt
     .hash(request.user.password, SALT_ROUNDS)
     .then(hashPass => {
       const validation = validateUser(request.user);
@@ -36,7 +36,7 @@ exports.create = (request, response, next) => {
         const userHash = request.user;
         userHash.password = hashPass;
 
-        userServices
+        return userServices
           .create(userHash)
           .then(userSaved => {
             logger.info(`New user created with email [${userSaved.email}]`);
