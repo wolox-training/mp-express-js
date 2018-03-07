@@ -2,28 +2,26 @@ const userServices = require('../services/user'),
   logger = require('../logger'),
   errors = require('../errors'),
   bcrypt = require('bcrypt'),
-  tokenManager = require('../services/tokenManager');
+  tokenManager = require('../services/tokenManager'),
+  validations = require('../services/validations');
 
 const validateUser = user => {
   const validation = {
-    message: '',
-    isValid: true
+    isValid: true,
+    messages: []
   };
-  if (
-    user.password &&
-    (user.password.length < 8 || !user.password.match('([A-Za-z]+[0-9]+)|([0-9]+[A-Za-z]+)'))
-  ) {
-    validation.isValid = false;
-    validation.message = 'Password of user must be alphanumeric and 8 characters minimum';
-    return validation;
-  }
+  validations.validateEmail(user, validation);
+  validations.validatePassword(user, validation);
+  return validation;
+};
 
-  if (user.email && !user.email.match('^[A-Za-z0-9._%+-]+@wolox.com.ar')) {
-    validation.isValid = false;
-    validation.message = 'Email invalid';
-    return validation;
-  }
-
+const validateLogin = user => {
+  const validation = {
+    isValid: true,
+    messages: []
+  };
+  validations.validateLogin(user, validation);
+  validations.validateEmail(user, validation);
   return validation;
 };
 
@@ -49,7 +47,7 @@ exports.create = (request, response, next) => {
             next(err);
           });
       } else {
-        next(errors.badRequest(validation.message));
+        next(errors.badRequest(validation.messages));
       }
     })
     .catch(error => errors.defaultError(error));
@@ -62,10 +60,10 @@ exports.login = (request, response, next) => {
         password: request.body.password
       }
     : {};
-  const validation = validateUser(userData);
+  const validation = validateLogin(userData);
   logger.info(`Attempt login for user ${userData.email}`);
   if (validation.isValid) {
-    userServices
+    return userServices
       .findByEmail(userData.email)
       .then(user => {
         if (user === null) {
@@ -87,6 +85,6 @@ exports.login = (request, response, next) => {
       })
       .catch(next);
   } else {
-    next(errors.badRequest(validation.message));
+    next(errors.badRequest(validation.messages));
   }
 };
