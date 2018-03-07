@@ -7,7 +7,8 @@ sudo: true
 
 env:
   - CXX=g++-4.8
-  - NODE_API_DB_NAME=training
+  - NODE_API_DB_NAME_TEST=training
+  - NODE_ENV=testing
 addons:
   apt:
     sources:
