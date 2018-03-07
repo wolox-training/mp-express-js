@@ -7,7 +7,7 @@ sudo: true
 
 env:
   - CXX=g++-4.8
-  - DB=postgres
+  - DB=training
 addons:
   apt:
     sources:
@@ -19,7 +19,7 @@ services:
   - postgresql
 
 before_script:
-  - psql -c "CREATE DATABASE postgres;" -U postgres
+  - psql -c "CREATE DATABASE training;" -U postgres
 
 script:
   - cd training-node
