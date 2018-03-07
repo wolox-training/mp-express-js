@@ -1,6 +1,7 @@
 const chai = require('chai'),
   dictum = require('dictum.js'),
   server = require('./../app'),
+  tokenManager = require('../app/services/tokenManager'),
   should = chai.should();
 
 const successUserCreate = () =>
@@ -91,5 +92,90 @@ describe('users', () => {
           });
       });
     });
+  });
+
+  describe('/users/sessions POST', () => {
+    it('should success auth ', done => {
+      successUserCreate().then(res => {
+        chai
+          .request(server)
+          .post('/users/sessions')
+          .send({ email: 'martin@wolox.com.ar', password: '12346578q' })
+          .then(response => {
+            dictum.chai(response);
+            response.should.have.status(200);
+            response.header.should.have.property(tokenManager.HEADER_NAME).should.not.be.null;
+            done();
+          });
+      });
+    });
+    it('should fail auth because incorrect password', done => {
+      successUserCreate().then(res => {
+        chai
+          .request(server)
+          .post('/users/sessions')
+          .send({ email: 'martin@wolox.com.ar', password: '123' })
+          .catch(err => {
+            err.should.have.status(400);
+            err.response.should.be.json;
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+  });
+  it('should fail auth because of missing property password', done => {
+    successUserCreate().then(res => {
+      chai
+        .request(server)
+        .post('/users/sessions')
+        .send({ email: 'martin@wolox.com.ar' })
+        .catch(err => {
+          err.should.have.status(400);
+          err.response.should.be.json;
+          err.response.body.should.have.property('error');
+          done();
+        });
+    });
+  });
+  it('should fail auth because of missing property email', done => {
+    successUserCreate().then(res => {
+      chai
+        .request(server)
+        .post('/users/sessions')
+        .send({ password: '123' })
+        .catch(err => {
+          err.should.have.status(400);
+          err.response.should.be.json;
+          err.response.body.should.have.property('error');
+          done();
+        });
+    });
+  });
+  it('should fail auth because is an invalid email', done => {
+    successUserCreate().then(res => {
+      chai
+        .request(server)
+        .post('/users/sessions')
+        .send({ email: 'martin@walox.com.ar', password: '12346578q' })
+        .catch(err => {
+          err.should.have.status(400);
+          err.response.should.be.json;
+          err.response.body.should.have.property('error');
+          done();
+        });
+    });
+  });
+  it('should fail auth because user does not exist', done => {
+    chai
+      .request(server)
+      .post('/users/sessions')
+      .send({ email: 'user@wolox.com.ar', password: '12346578q' })
+      .catch(err => {
+        err.should.have.status(400);
+        err.response.should.be.json;
+        err.response.body.should.have.property('error');
+        done();
+      });
   });
 });
