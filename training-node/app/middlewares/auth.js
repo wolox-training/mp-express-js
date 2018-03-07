@@ -1,12 +1,18 @@
 const tokenManager = require('../services/tokenManager'),
   userServices = require('../services/user'),
-  errors = require('../errors');
+  errors = require('../errors'),
+  logger = require('../logger');
 
 exports.require = (request, response, next) => {
   const token = request.headers[tokenManager.HEADER_NAME];
 
   if (token) {
-    const payload = tokenManager.decode(token);
+    let payload = null;
+    try {
+      payload = tokenManager.decode(token);
+    } catch (err) {
+      logger.error(`Error decoding token ${token}`, err);
+    }
     if (payload) {
       userServices
         .findByEmail(payload)
