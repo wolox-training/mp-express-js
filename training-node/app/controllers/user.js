@@ -90,6 +90,13 @@ exports.login = (request, response, next) => {
 };
 
 exports.search = (request, response, next) => {
-  response.status(200);
-  response.end();
+  return userServices
+    .search(request.query.offset, request.query.limit)
+    .then(users => {
+      return userServices.count().then(countUsers => {
+        response.status(200);
+        response.json({ results: users, total: countUsers });
+      });
+    })
+    .catch(next);
 };
