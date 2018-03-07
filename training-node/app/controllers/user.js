@@ -80,7 +80,7 @@ exports.login = (request, response, next) => {
           response.set(tokenManager.HEADER_NAME, token);
           response.end();
         } else {
-          throw errors.badRequest(`Invalid password for user ${userData.email}`);
+          next(errors.badRequest(`Invalid password for user ${userData.email}`));
         }
       })
       .catch(next);
