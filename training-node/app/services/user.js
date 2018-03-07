@@ -6,9 +6,9 @@ const User = require('../models').users,
 exports.create = user =>
   User.create(user).catch(e => {
     if (e instanceof Sequelize.ValidationError) {
-      throw errors.savingError(e.errors);
+      return Promise.reject(errors.savingError(e.errors));
     } else {
       logger.error('Database error', e);
-      throw errors.defaultError('Database error');
+      return Promise.reject(errors.defaultError('Database error'));
     }
   });
