@@ -3,7 +3,7 @@ const userServices = require('../services/user'),
   errors = require('../errors'),
   bcrypt = require('bcrypt'),
   tokenManager = require('../services/tokenManager'),
-  validations = require('../services/validations');
+  validations = require('./validations');
 
 const validateUser = user => {
   const validation = {
