@@ -188,7 +188,7 @@ describe('users', () => {
 
           chai
             .request(server)
-            .get('/users?offset=1&size=2')
+            .get('/users?offset=0&size=2')
             .set(tokenManager.HEADER_NAME, token)
             .then(result => {
               dictum.chai(result);
