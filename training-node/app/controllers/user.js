@@ -5,7 +5,7 @@ const userServices = require('../services/user'),
 
 const validateUser = user => {
   const validation = {
-    message: '',
+    messages: [],
     isValid: true
   };
   if (
@@ -13,14 +13,12 @@ const validateUser = user => {
     (user.password.length < 8 || !user.password.match('([A-Za-z]+[0-9]+)|([0-9]+[A-Za-z]+)'))
   ) {
     validation.isValid = false;
-    validation.message = 'Password of user must be alphanumeric and 8 characters minimum';
-    return validation;
+    validation.messages.push({ message: 'Password of user must be alphanumeric and 8 characters minimum' });
   }
 
   if (user.email && !user.email.match('^[A-Za-z0-9._%+-]+@wolox.com.ar')) {
     validation.isValid = false;
-    validation.message = 'Email invalid';
-    return validation;
+    validation.messages.push({ message: 'Email invalid' });
   }
 
   return validation;
@@ -28,7 +26,7 @@ const validateUser = user => {
 
 exports.create = (request, response, next) => {
   const SALT_ROUNDS = 10;
-  bcrypt
+  return bcrypt
     .hash(request.user.password, SALT_ROUNDS)
     .then(hashPass => {
       const validation = validateUser(request.user);
@@ -37,7 +35,7 @@ exports.create = (request, response, next) => {
         const userHash = request.user;
         userHash.password = hashPass;
 
-        userServices
+        return userServices
           .create(userHash)
           .then(userSaved => {
             logger.info(`New user created with email [${userSaved.email}]`);
@@ -48,7 +46,7 @@ exports.create = (request, response, next) => {
             next(err);
           });
       } else {
-        next(errors.savingError(validation.message));
+        next(errors.savingError(validation.messages));
       }
     })
     .catch(error => errors.defaultError(error));
