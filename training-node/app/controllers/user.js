@@ -88,3 +88,8 @@ exports.login = (request, response, next) => {
     next(errors.badRequest(validation.messages));
   }
 };
+
+exports.search = (request, response, next) => {
+  response.status(200);
+  response.end();
+};

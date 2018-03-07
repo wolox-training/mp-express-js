@@ -16,3 +16,10 @@ exports.badRequest = message => {
     message
   };
 };
+
+exports.unauthorized = message => {
+  return {
+    statusCode: 401,
+    message
+  };
+};
