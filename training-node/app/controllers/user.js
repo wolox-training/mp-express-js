@@ -42,6 +42,7 @@ exports.create = (request, response, next) => {
       if (validation.isValid) {
         const userHash = request.user;
         userHash.password = hashPass;
+        userHash.typeUser = constants.USER_REGULAR;
 
         return userServices
           .create(userHash)
@@ -125,11 +126,11 @@ exports.createUpdateAdmin = (request, response, next) => {
         return userServices
           .createOrUpdate(userHash)
           .then(userSaved => {
-            logger.info(`New admin user created/updated with email [${userSaved.email}]`);
+            logger.info(`New admin user created/updated with email [${userHash.email}]`);
             response.status(200).end();
           })
           .catch(err => {
-            logger.error(`Error creating admin user with email [${request.user.email}]`);
+            logger.error(`Error creating admin user with email [${userHash.email}]`);
             next(err);
           });
       } else {

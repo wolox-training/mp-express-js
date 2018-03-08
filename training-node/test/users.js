@@ -16,6 +16,18 @@ const successUserAuth = () =>
     .post('/users/sessions')
     .send({ email: 'martin@wolox.com.ar', password: '12346578q' });
 
+const successAdminAuth = () =>
+  chai
+    .request(server)
+    .post('/users/sessions')
+    .send({ email: 'admin@wolox.com.ar', password: '1234567a' });
+
+const successCommonAuth = () =>
+  chai
+    .request(server)
+    .post('/users/sessions')
+    .send({ email: 'common@wolox.com.ar', password: '1234567a' });
+
 describe('users', () => {
   describe('/users POST', () => {
     it('should success creation ', done => {
@@ -215,6 +227,190 @@ describe('users', () => {
         .request(server)
         .get('/users')
         .set(tokenManager.HEADER_NAME, 'aaaaaaaaaaaaaaaaaaaa')
+        .catch(err => {
+          err.response.should.have.status(401);
+          err.response.body.should.have.property('error');
+          done();
+        });
+    });
+  });
+  describe('/users/admin POST', () => {
+    it('should success admin creation ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common2',
+            lastName: 'common2',
+            email: 'common2@wolox.com.ar',
+            password: '12345678a'
+          })
+          .then(res => {
+            dictum.chai(res);
+            res.should.have.status(200);
+            done();
+          });
+      });
+    });
+    it('should success admin update ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            lastName: 'common',
+            email: 'common@wolox.com.ar',
+            password: '12345678a'
+          })
+          .then(res => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+    });
+    it('should fail admin update/create because of missing field name ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            lastName: 'common',
+            email: 'common@wolox.com.ar',
+            password: '12345678a'
+          })
+          .catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin update/create because of missing field lastName ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            email: 'common@wolox.com.ar',
+            password: '12345678a'
+          })
+          .catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin update/create because of missing field password ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            lastName: 'common',
+            email: 'common@wolox.com.ar'
+          })
+          .catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin update/create because of missing field email ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            lastName: 'common',
+            password: '12345678a'
+          })
+          .catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin update/create because of invalid field email ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            lastName: 'common',
+            email: 'martin@gmail.com',
+            password: '12345678a'
+          })
+          .catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin update/create because of invalid field password ', done => {
+      successAdminAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            lastName: 'common',
+            email: 'martin@wolox.com.ar',
+            password: '1234'
+          })
+          .catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin creation because user does not have permissions', done => {
+      successCommonAuth().then(response => {
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+          .send({
+            name: 'common',
+            lastName: 'common',
+            email: 'common@wolox.com.ar',
+            password: '12345678a'
+          })
+          .catch(err => {
+            err.response.should.have.status(401);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    });
+    it('should fail admin creation because user is not authenticated', done => {
+      chai
+        .request(server)
+        .post('/users/admin')
+        .send({
+          name: 'common',
+          lastName: 'common',
+          email: 'common@wolox.com.ar',
+          password: '12345678a'
+        })
         .catch(err => {
           err.response.should.have.status(401);
           err.response.body.should.have.property('error');
