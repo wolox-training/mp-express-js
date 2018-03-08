@@ -1,6 +1,0 @@
-{
-  "scripts": {
-    "install": "cd training-node && npm install",
-    "start": "cd training-node && npm start" 
-  }
-}
