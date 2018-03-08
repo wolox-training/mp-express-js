@@ -88,3 +88,13 @@ exports.login = (request, response, next) => {
     next(errors.badRequest(validation.messages));
   }
 };
+
+exports.findAll = (request, response, next) => {
+  return userServices
+    .search(request.query.offset, request.query.limit)
+    .then(result => {
+      response.status(200);
+      response.send({ results: result.rows, total: result.count });
+    })
+    .catch(next);
+};
