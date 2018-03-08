@@ -18,7 +18,7 @@
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
   "content-type": "application/json",
   "content-length": 54
-}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-GET" href="#collapse-users-GET">GET /users?offset=0&size=2</a></h4></div><div id="collapse-users-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
+}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-GET" href="#collapse-users-GET">GET /users?offset=0&limit=2</a></h4></div><div id="collapse-users-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
   "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.Im1hcnRpbkB3b2xveC5jb20uYXIi.asxuesAVfZFjxBSoQSiSPD18rjyPDs7Gy5BszQRhM5c"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
   "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.Im1hcnRpbkB3b2xveC5jb20uYXIi.asxuesAVfZFjxBSoQSiSPD18rjyPDs7Gy5BszQRhM5c"
@@ -26,11 +26,33 @@
   "results": [
     {
       "id": 1,
-      "name": "martin",
-      "lastName": "picollo",
-      "email": "martin@wolox.com.ar",
-      "password": "$2a$10$gn4kxWMWrK6qqRcO.aaXRO5lMSc8FL459aKy2RLv4gb0c4qAoYmjO"
+      "name": "admin",
+      "lastName": "admin",
+      "email": "admin@wolox.com.ar",
+      "password": "$2a$10$eneYde1no87t3VmiYaBN.eIAlHKqzaj7lRmj6onJy330AOJL8ay0m",
+      "typeUser": "A"
+    },
+    {
+      "id": 2,
+      "name": "common",
+      "lastName": "common",
+      "email": "common@wolox.com.ar",
+      "password": "$2a$10$eneYde1no87t3VmiYaBN.eIAlHKqzaj7lRmj6onJy330AOJL8ay0m",
+      "typeUser": "R"
     }
   ],
-  "total": 1
-}</pre></div></div></div></div></div></body></html>
+  "total": 3
+}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-admin-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-admin-POST" href="#collapse-users-admin-POST">POST /users/admin</a></h4></div><div id="collapse-users-admin-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-admin-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ImFkbWluQHdvbG94LmNvbS5hciI.KxOb99Q_PpCJZ37hzot-0LdphKswwSTBlFlzQGMxtck",
+  "content-type": "application/json",
+  "content-length": 93
+}</pre><h5>Body</h5><pre>{
+  "name": "common2",
+  "lastName": "common2",
+  "email": "common2@wolox.com.ar",
+  "password": "12345678a"
+}</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ImFkbWluQHdvbG94LmNvbS5hciI.KxOb99Q_PpCJZ37hzot-0LdphKswwSTBlFlzQGMxtck",
+  "content-type": "application/json",
+  "content-length": 93
+}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div></div></body></html>

@@ -21,3 +21,10 @@ exports.validatePassword = (user, validation) => {
     });
   }
 };
+exports.validateTypeUser = (user, validation, requiredType) => {
+  if (user.typeUser && user.typeUser !== requiredType) {
+    validation.isValid = false;
+    validation.messages.push({ message: 'User type does not have permission' });
+    validation.statusCode = 401;
+  }
+};
