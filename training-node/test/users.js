@@ -194,6 +194,7 @@ describe('users', () => {
               dictum.chai(result);
               result.should.have.status(200);
               result.body.should.have.property('results');
+              result.body.results.should.have.length(1);
               result.body.should.have.property('total');
               done();
             });

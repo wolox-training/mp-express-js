@@ -92,11 +92,9 @@ exports.login = (request, response, next) => {
 exports.findAll = (request, response, next) => {
   return userServices
     .search(request.query.offset, request.query.limit)
-    .then(users => {
-      return userServices.count().then(countUsers => {
-        response.status(200);
-        response.send({ results: users, total: countUsers });
-      });
+    .then(result => {
+      response.status(200);
+      response.send({ results: result.rows, total: result.count });
     })
     .catch(next);
 };

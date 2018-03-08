@@ -19,6 +19,5 @@ exports.create = user =>
 
 exports.findByEmail = email => User.findOne({ where: { email } }).catch(notifyErrorDatabase);
 
-exports.search = (offset = 0, limit = 50) => User.findAll({ offset, limit }).catch(notifyErrorDatabase);
-
-exports.count = () => User.count().catch(notifyErrorDatabase);
+exports.search = (offset = 0, limit = 50) =>
+  User.findAndCountAll({ offset, limit }).catch(notifyErrorDatabase);
