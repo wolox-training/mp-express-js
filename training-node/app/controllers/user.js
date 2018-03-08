@@ -89,17 +89,14 @@ exports.login = (request, response, next) => {
   }
 };
 
-exports.search = (request, response, next) => {
+exports.findAll = (request, response, next) => {
   return userServices
     .search(request.query.offset, request.query.limit)
     .then(users => {
-      return userServices
-        .count()
-        .then(countUsers => {
-          response.status(200);
-          response.json({ results: users, total: countUsers });
-        })
-        .catch(next);
+      return userServices.count().then(countUsers => {
+        response.status(200);
+        response.send({ results: users, total: countUsers });
+      });
     })
     .catch(next);
 };
