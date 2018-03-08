@@ -10,7 +10,7 @@ exports.defaultError = message => {
   };
 };
 
-exports.savingError = message => {
+exports.badRequest = message => {
   return {
     statusCode: 400,
     message
