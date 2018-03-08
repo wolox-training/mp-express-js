@@ -1,4 +1,5 @@
 const users = require('./controllers/user'),
+  albums = require('./controllers/albums'),
   userMiddle = require('./middlewares/user'),
   auth = require('./middlewares/auth');
 
@@ -7,4 +8,5 @@ exports.init = app => {
   app.post('/users/sessions', [], users.login);
   app.get('/users', [auth.require], users.findAll);
   app.post('/users/admin', [userMiddle.validate, auth.require], users.createUpdateAdmin);
+  app.get('/albums', [auth.require], albums.findAll);
 };

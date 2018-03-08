@@ -22,7 +22,7 @@ const successAdminAuth = () =>
     .post('/users/sessions')
     .send({ email: 'admin@wolox.com.ar', password: '1234567a' });
 
-const successCommonAuth = () =>
+exports.successCommonAuth = () =>
   chai
     .request(server)
     .post('/users/sessions')
@@ -384,7 +384,7 @@ describe('users', () => {
       });
     });
     it('should fail admin creation because user does not have permissions', done => {
-      successCommonAuth().then(response => {
+      exports.successCommonAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
