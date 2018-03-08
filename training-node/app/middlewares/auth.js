@@ -14,7 +14,7 @@ exports.require = (request, response, next) => {
       logger.error(`Error decoding token ${token}`, err);
     }
     if (payload) {
-      userServices
+      return userServices
         .findByEmail(payload)
         .then(user => {
           if (user) {
