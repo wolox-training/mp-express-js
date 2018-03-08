@@ -1,9 +1,11 @@
 const userServices = require('../services/user'),
+  constants = require('./constants'),
   logger = require('../logger'),
   errors = require('../errors'),
   bcrypt = require('bcrypt'),
   tokenManager = require('../services/tokenManager'),
-  validations = require('./validations');
+  validations = require('./validations'),
+  SALT_ROUNDS = 10;
 
 const validateUser = user => {
   const validation = {
@@ -25,8 +27,13 @@ const validateLogin = user => {
   return validation;
 };
 
+const validateAdmin = (user, logged) => {
+  const validation = validateUser(user);
+  validations.validateTypeUser(logged, validation, constants.USER_ADMIN);
+  return validation;
+};
+
 exports.create = (request, response, next) => {
-  const SALT_ROUNDS = 10;
   return bcrypt
     .hash(request.user.password, SALT_ROUNDS)
     .then(hashPass => {
@@ -39,11 +46,11 @@ exports.create = (request, response, next) => {
         return userServices
           .create(userHash)
           .then(userSaved => {
-            logger.info(`New user created with email [${userSaved.email}]`);
+            logger.info(`New user created with email [${userHash.email}]`);
             response.status(200).end();
           })
           .catch(err => {
-            logger.error(`Error creating user with email [${request.user.email}]`);
+            logger.error(`Error creating user with email [${userHash.email}]`);
             next(err);
           });
       } else {
@@ -102,4 +109,32 @@ exports.search = (request, response, next) => {
         .catch(next);
     })
     .catch(next);
+};
+
+exports.createUpdateAdmin = (request, response, next) => {
+  return bcrypt
+    .hash(request.user.password, SALT_ROUNDS)
+    .then(hashPass => {
+      const validation = validateAdmin(request.user, request.userLogged);
+
+      if (validation.isValid) {
+        const userHash = request.user;
+        userHash.password = hashPass;
+        userHash.typeUser = constants.USER_ADMIN;
+
+        return userServices
+          .createOrUpdate(userHash)
+          .then(userSaved => {
+            logger.info(`New admin user created/updated with email [${userSaved.email}]`);
+            response.status(200).end();
+          })
+          .catch(err => {
+            logger.error(`Error creating admin user with email [${request.user.email}]`);
+            next(err);
+          });
+      } else {
+        next(errors.badRequest(validation.messages, validation.statusCode));
+      }
+    })
+    .catch(error => errors.defaultError(error));
 };

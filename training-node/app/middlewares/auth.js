@@ -18,7 +18,7 @@ exports.require = (request, response, next) => {
         .findByEmail(payload)
         .then(user => {
           if (user) {
-            request.user = user;
+            request.userLogged = user;
             next();
           } else {
             next(errors.unauthorized('User not found'));

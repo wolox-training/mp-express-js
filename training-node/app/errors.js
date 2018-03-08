@@ -10,9 +10,9 @@ exports.defaultError = message => {
   };
 };
 
-exports.badRequest = message => {
+exports.badRequest = (message, statusCode = 400) => {
   return {
-    statusCode: 400,
+    statusCode,
     message
   };
 };

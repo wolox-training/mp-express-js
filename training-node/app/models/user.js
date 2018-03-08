@@ -1,9 +1,3 @@
-const USER_REGULAR = 'R';
-const USER_ADMIN = 'A';
-
-exports.USER_ADMIN;
-exports.USER_REGULAR;
-
 module.exports = (sequelize, DataTypes) =>
   sequelize.define(
     'users',
@@ -25,8 +19,7 @@ module.exports = (sequelize, DataTypes) =>
       },
       typeUser: {
         type: DataTypes.STRING(1),
-        allowNull: false,
-        defaultValue: USER_REGULAR
+        allowNull: false
       }
     },
     {
