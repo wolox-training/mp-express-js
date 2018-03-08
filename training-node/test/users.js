@@ -200,12 +200,13 @@ describe('users', () => {
 
           chai
             .request(server)
-            .get('/users?offset=1&size=2')
+            .get('/users?offset=0&limit=2')
             .set(tokenManager.HEADER_NAME, token)
             .then(result => {
               dictum.chai(result);
               result.should.have.status(200);
               result.body.should.have.property('results');
+              result.body.results.should.have.length(2);
               result.body.should.have.property('total');
               done();
             });

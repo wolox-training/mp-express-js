@@ -5,6 +5,6 @@ const users = require('./controllers/user'),
 exports.init = app => {
   app.post('/users', [userMiddle.validate], users.create);
   app.post('/users/sessions', [], users.login);
-  app.get('/users', [auth.require], users.search);
+  app.get('/users', [auth.require], users.findAll);
   app.post('/users/admin', [userMiddle.validate, auth.require], users.createUpdateAdmin);
 };
