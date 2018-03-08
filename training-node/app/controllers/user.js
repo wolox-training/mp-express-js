@@ -7,13 +7,16 @@ const userServices = require('../services/user'),
   validations = require('./validations'),
   SALT_ROUNDS = 10;
 
-const validateUser = user => {
+const validateUser = (user, userLogged, role) => {
   const validation = {
     isValid: true,
     messages: []
   };
   validations.validateEmail(user, validation);
   validations.validatePassword(user, validation);
+  if (userLogged) {
+    validations.validateTypeUser(userLogged, validation, role);
+  }
   return validation;
 };
 
@@ -27,38 +30,34 @@ const validateLogin = user => {
   return validation;
 };
 
-const validateAdmin = (user, logged) => {
-  const validation = validateUser(user);
-  validations.validateTypeUser(logged, validation, constants.USER_ADMIN);
-  return validation;
+const createUpdateUser = (userData, creator, role = constants.USER_REGULAR, method = 'create') => {
+  return bcrypt.hash(userData.password, SALT_ROUNDS).then(hashPass => {
+    const validation = validateUser(userData, creator, role);
+
+    if (validation.isValid) {
+      const userHash = userData;
+      userHash.password = hashPass;
+      userHash.typeUser = role;
+
+      return userServices[method](userHash)
+        .then(userSaved => {
+          logger.info(`Success to ${method} user with email [${userData.email}]`);
+          return Promise.resolve(userSaved);
+        })
+        .catch(err => {
+          logger.error(`Error trying to ${method} user with email [${userHash.email}]`);
+          return Promise.reject(err);
+        });
+    } else {
+      return Promise.reject(errors.badRequest(validation.messages, validation.statusCode));
+    }
+  });
 };
 
 exports.create = (request, response, next) => {
-  return bcrypt
-    .hash(request.user.password, SALT_ROUNDS)
-    .then(hashPass => {
-      const validation = validateUser(request.user);
-
-      if (validation.isValid) {
-        const userHash = request.user;
-        userHash.password = hashPass;
-        userHash.typeUser = constants.USER_REGULAR;
-
-        return userServices
-          .create(userHash)
-          .then(userSaved => {
-            logger.info(`New user created with email [${userHash.email}]`);
-            response.status(200).end();
-          })
-          .catch(err => {
-            logger.error(`Error creating user with email [${userHash.email}]`);
-            next(err);
-          });
-      } else {
-        next(errors.badRequest(validation.messages));
-      }
-    })
-    .catch(error => errors.defaultError(error));
+  return createUpdateUser(request.user)
+    .then(user => response.status(200).end())
+    .catch(next);
 };
 
 exports.login = (request, response, next) => {
@@ -108,29 +107,9 @@ exports.findAll = (request, response, next) => {
 };
 
 exports.createUpdateAdmin = (request, response, next) => {
-  return bcrypt
-    .hash(request.user.password, SALT_ROUNDS)
-    .then(hashPass => {
-      const validation = validateAdmin(request.user, request.userLogged);
-
-      if (validation.isValid) {
-        const userHash = request.user;
-        userHash.password = hashPass;
-        userHash.typeUser = constants.USER_ADMIN;
-
-        return userServices
-          .createOrUpdate(userHash)
-          .then(userSaved => {
-            logger.info(`New admin user created/updated with email [${userHash.email}]`);
-            response.status(200).end();
-          })
-          .catch(err => {
-            logger.error(`Error creating admin user with email [${userHash.email}]`);
-            next(err);
-          });
-      } else {
-        next(errors.badRequest(validation.messages, validation.statusCode));
-      }
+  return createUpdateUser(request.user, request.userLogged, constants.USER_ADMIN, 'createOrUpdate')
+    .then(userCreated => {
+      response.status(200).end();
     })
-    .catch(error => errors.defaultError(error));
+    .catch(next);
 };

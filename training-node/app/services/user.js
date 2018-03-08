@@ -26,12 +26,13 @@ exports.search = (offset = 0, limit = 50) =>
   User.findAndCountAll({ offset, limit }).catch(notifyErrorDatabase);
 
 exports.createOrUpdate = user =>
-  this.findByEmail(user.email)
+  exports
+    .findByEmail(user.email)
     .then(userFound => {
       if (userFound) {
-        return this.update(user);
+        return exports.update(user);
       } else {
-        return this.create(user);
+        return exports.create(user);
       }
     })
     .catch(notifyErrorDatabase);
