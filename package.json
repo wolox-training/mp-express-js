@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "install": "cd client && npm install"
+    "install": "cd training-node && npm install"
   }
 }
