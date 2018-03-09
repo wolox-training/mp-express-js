@@ -19,7 +19,7 @@ exports.findAll = () =>
 exports.buy = (userId, albumId) =>
   exports
     .get(albumId)
-    .then(album =>
+    .then(() =>
       UserAlbum.create({ userId, albumId }).catch(err =>
         errorHandler.handleValidationError(err, 'This album was already purchased by the user')
       )
