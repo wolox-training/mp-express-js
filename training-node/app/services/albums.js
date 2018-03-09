@@ -1,15 +1,13 @@
-const axios = require('axios'),
+const request = require('request-promise'),
   albumsURL = 'https://jsonplaceholder.typicode.com/albums',
   errors = require('../errors'),
   logger = require('../logger');
 
 exports.findAll = () =>
-  axios
-    .get(albumsURL)
-    .then(result => {
-      return result.data;
-    })
-    .catch(err => {
-      logger.error('Error fetching albums', err);
-      return errors.defaultError('Error fetching albums');
-    });
+  request({
+    json: true,
+    uri: albumsURL
+  }).catch(err => {
+    logger.error('Error fetching albums', err);
+    return errors.defaultError('Error fetching albums');
+  });
