@@ -1,21 +1,17 @@
 const request = require('request-promise'),
-  albumsURL = 'https://jsonplaceholder.typicode.com/albums',
+  config = require('../../config'),
+  albumsURL = `${config.common.apiExternal}/albums`,
   errors = require('../errors'),
   logger = require('../logger'),
   UserAlbum = require('../models').userAlbums,
   userServices = require('./user'),
   errorHandler = require('./errorHandler');
 
-const errorRequest = err => {
-  logger.error('Error fetching albums', err);
-  return Promise.reject(errors.fetchAlbums(err.statusCode));
-};
-
 exports.findAll = () =>
   request({
     json: true,
     uri: albumsURL
-  }).catch(errorRequest);
+  }).catch(errorHandler.errorRequest);
 
 exports.buy = (userId, albumId) =>
   exports
@@ -30,7 +26,7 @@ exports.get = albumId =>
   request({
     json: true,
     uri: `${albumsURL}/${albumId}`
-  }).catch(errorRequest);
+  }).catch(errorHandler.errorRequest);
 
 exports.purchasedAlbums = condition =>
   userServices.findUniqueBy({ id: condition.userId }).then(user => {
@@ -42,3 +38,6 @@ exports.purchasedAlbums = condition =>
       return Promise.reject(errors.badRequest('User not found'));
     }
   });
+
+exports.findUniqueBy = condition =>
+  UserAlbum.findOne({ where: condition }).catch(errorHandler.notifyErrorDatabase);

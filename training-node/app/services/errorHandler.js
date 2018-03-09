@@ -14,3 +14,8 @@ exports.handleValidationError = (e, msg) => {
     return exports.notifyErrorDatabase(e);
   }
 };
+
+exports.errorRequest = err => {
+  logger.error('Error fetching albums', err);
+  return Promise.reject(errors.fetchAlbums(err.statusCode));
+};
