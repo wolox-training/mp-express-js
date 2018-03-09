@@ -23,3 +23,10 @@ exports.unauthorized = message => {
     message
   };
 };
+
+exports.fetchAlbums = (statusCode = 500, message = 'Error fetching albums') => {
+  return {
+    statusCode,
+    message
+  };
+};
