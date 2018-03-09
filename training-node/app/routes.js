@@ -10,4 +10,5 @@ exports.init = app => {
   app.post('/users/admin', [userMiddle.validate, auth.require], users.createUpdateAdmin);
   app.get('/albums', [auth.require], albums.findAll);
   app.post('/albums/:albumId', [auth.require], albums.buy);
+  app.get('/users/:userId/albums', [auth.require], albums.findByUser);
 };

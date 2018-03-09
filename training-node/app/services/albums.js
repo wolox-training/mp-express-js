@@ -3,6 +3,7 @@ const request = require('request-promise'),
   errors = require('../errors'),
   logger = require('../logger'),
   UserAlbum = require('../models').userAlbums,
+  userServices = require('./user'),
   errorHandler = require('./errorHandler');
 
 const errorRequest = err => {
@@ -30,3 +31,14 @@ exports.get = albumId =>
     json: true,
     uri: `${albumsURL}/${albumId}`
   }).catch(errorRequest);
+
+exports.purchasedAlbums = condition =>
+  userServices.findUniqueBy({ id: condition.userId }).then(user => {
+    if (user) {
+      return UserAlbum.findAll({ where: condition })
+        .then(albumsDB => Promise.all(albumsDB.map(album => exports.get(album.albumId))))
+        .catch(errorHandler.notifyErrorDatabase);
+    } else {
+      return Promise.reject(errors.badRequest('User not found'));
+    }
+  });
