@@ -9,14 +9,15 @@ exports.create = user => User.create(user).catch(errorHandler.handleValidationEr
 exports.update = user =>
   User.update(user, { where: { email: user.email } }).catch(errorHandler.handleValidationError);
 
-exports.findByEmail = email => User.findOne({ where: { email } }).catch(errorHandler.notifyErrorDatabase);
+exports.findUniqueBy = condition =>
+  User.findOne({ where: condition }).catch(errorHandler.notifyErrorDatabase);
 
 exports.search = (offset = 0, limit = 50) =>
   User.findAndCountAll({ offset, limit }).catch(errorHandler.notifyErrorDatabase);
 
 exports.createOrUpdate = user =>
   exports
-    .findByEmail(user.email)
+    .findUniqueBy({ email: user.email })
     .then(userFound => {
       if (userFound) {
         return exports.update(user);

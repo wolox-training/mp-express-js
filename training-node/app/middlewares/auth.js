@@ -15,7 +15,7 @@ exports.require = (request, response, next) => {
     }
     if (payload) {
       return userServices
-        .findByEmail(payload)
+        .findUniqueBy({ email: payload })
         .then(user => {
           if (user) {
             request.userLogged = user;

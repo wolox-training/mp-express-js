@@ -71,7 +71,7 @@ exports.login = (request, response, next) => {
   logger.info(`Attempt login for user ${userData.email}`);
   if (validation.isValid) {
     return userServices
-      .findByEmail(userData.email)
+      .findUniqueBy({ email: userData.email })
       .then(user => {
         if (user === null) {
           throw errors.badRequest(`User not found ${userData.email}`);
