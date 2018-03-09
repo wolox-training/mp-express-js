@@ -9,5 +9,5 @@ exports.init = app => {
   app.get('/users', [auth.require], users.findAll);
   app.post('/users/admin', [userMiddle.validate, auth.require], users.createUpdateAdmin);
   app.get('/albums', [auth.require], albums.findAll);
-  app.post('/albums/:id', [auth.require], albums.buy);
+  app.post('/albums/:albumId', [auth.require], albums.buy);
 };

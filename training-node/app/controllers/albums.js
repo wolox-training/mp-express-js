@@ -10,7 +10,11 @@ exports.findAll = (request, response, next) =>
     })
     .catch(next);
 
-exports.buy = (request, response, next) => {
-  response.status(200);
-  response.end();
-};
+exports.buy = (request, response, next) =>
+  albumsServices
+    .buy(request.userLogged.id, request.params.albumId)
+    .then(() => {
+      response.status(200);
+      response.end();
+    })
+    .catch(next);

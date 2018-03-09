@@ -5,19 +5,11 @@ module.exports = (sequelize, DataTypes) =>
       id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       albumId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: {
-          args: 'uniqueIndex',
-          msg: 'This album has already been purchased by this user'
-        }
+        allowNull: false
       },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: {
-          args: 'uniqueIndex',
-          msg: 'This album has already been purchased by this user'
-        },
         references: {
           model: 'users',
           key: 'id'
