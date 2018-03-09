@@ -7,7 +7,7 @@ const request = require('request-promise'),
 
 const errorRequest = err => {
   logger.error('Error fetching albums', err);
-  return Promise.reject({ message: 'Error fetching albums', statusCode: err.statusCode });
+  return Promise.reject(errors.fetchAlbums(err.statusCode));
 };
 
 exports.findAll = () =>
