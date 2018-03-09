@@ -46,6 +46,7 @@
     "jwt-simple": "^0.5.1",
     "morgan": "^1.7.0",
     "pg": "^4.4.6",
+    "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "rollbar": "^2.3.1",
     "sequelize": "^3.30.0",
