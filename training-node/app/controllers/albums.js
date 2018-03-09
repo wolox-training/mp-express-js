@@ -39,7 +39,6 @@ exports.buy = (request, response, next) => {
 
 exports.findByUser = (request, response, next) => {
   const validation = validateSameOrAdmin(request.userLogged, parseInt(request.params.userId));
-
   if (validation.isValid) {
     return albumsServices
       .purchasedAlbums({ userId: request.params.userId })

@@ -4,19 +4,19 @@ const chai = require('chai'),
   tokenManager = require('../app/services/tokenManager'),
   should = chai.should();
 
-const successUserCreate = () =>
+exports.successUserCreate = () =>
   chai
     .request(server)
     .post('/users')
     .send({ name: 'martin', lastName: 'picollo', email: 'martin@wolox.com.ar', password: '12346578q' });
 
-const successUserAuth = () =>
+exports.successUserAuth = () =>
   chai
     .request(server)
     .post('/users/sessions')
     .send({ email: 'martin@wolox.com.ar', password: '12346578q' });
 
-const successAdminAuth = () =>
+exports.successAdminAuth = () =>
   chai
     .request(server)
     .post('/users/sessions')
@@ -31,7 +31,7 @@ exports.successCommonAuth = () =>
 describe('users', () => {
   describe('/users POST', () => {
     it('should success creation ', done => {
-      successUserCreate().then(res => {
+      exports.successUserCreate().then(res => {
         dictum.chai(res);
         done();
       });
@@ -97,7 +97,7 @@ describe('users', () => {
         });
     });
     it('should fail creation because email already exist', done => {
-      successUserCreate().then(() => {
+      exports.successUserCreate().then(() => {
         chai
           .request(server)
           .post('/users')
@@ -114,8 +114,8 @@ describe('users', () => {
 
   describe('/users/sessions POST', () => {
     it('should success auth ', done => {
-      successUserCreate().then(res => {
-        successUserAuth().then(response => {
+      exports.successUserCreate().then(res => {
+        exports.successUserAuth().then(response => {
           dictum.chai(response);
           response.should.have.status(200);
           response.header.should.have.property(tokenManager.HEADER_NAME).should.not.be.null;
@@ -124,7 +124,7 @@ describe('users', () => {
       });
     });
     it('should fail auth because incorrect password', done => {
-      successUserCreate().then(res => {
+      exports.successUserCreate().then(res => {
         chai
           .request(server)
           .post('/users/sessions')
@@ -138,7 +138,7 @@ describe('users', () => {
       });
     });
     it('should fail auth because of missing property password', done => {
-      successUserCreate().then(res => {
+      exports.successUserCreate().then(res => {
         chai
           .request(server)
           .post('/users/sessions')
@@ -152,7 +152,7 @@ describe('users', () => {
       });
     });
     it('should fail auth because of missing property email', done => {
-      successUserCreate().then(res => {
+      exports.successUserCreate().then(res => {
         chai
           .request(server)
           .post('/users/sessions')
@@ -166,7 +166,7 @@ describe('users', () => {
       });
     });
     it('should fail auth because is an invalid email', done => {
-      successUserCreate().then(res => {
+      exports.successUserCreate().then(res => {
         chai
           .request(server)
           .post('/users/sessions')
@@ -194,8 +194,8 @@ describe('users', () => {
   });
   describe('/users GET', () => {
     it('should success search ', done => {
-      successUserCreate().then(res => {
-        successUserAuth().then(response => {
+      exports.successUserCreate().then(res => {
+        exports.successUserAuth().then(response => {
           const token = response.headers[tokenManager.HEADER_NAME];
 
           chai
@@ -237,7 +237,7 @@ describe('users', () => {
   });
   describe('/users/admin POST', () => {
     it('should success admin creation ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -256,7 +256,7 @@ describe('users', () => {
       });
     });
     it('should success admin update ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -274,7 +274,7 @@ describe('users', () => {
       });
     });
     it('should fail admin update/create because of missing field name ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -292,7 +292,7 @@ describe('users', () => {
       });
     });
     it('should fail admin update/create because of missing field lastName ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -310,7 +310,7 @@ describe('users', () => {
       });
     });
     it('should fail admin update/create because of missing field password ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -328,7 +328,7 @@ describe('users', () => {
       });
     });
     it('should fail admin update/create because of missing field email ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -346,7 +346,7 @@ describe('users', () => {
       });
     });
     it('should fail admin update/create because of invalid field email ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
@@ -365,7 +365,7 @@ describe('users', () => {
       });
     });
     it('should fail admin update/create because of invalid field password ', done => {
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         chai
           .request(server)
           .post('/users/admin')
