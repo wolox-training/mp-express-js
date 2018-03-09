@@ -1,4 +1,7 @@
 exports.config = {
   environment: 'production',
-  isProduction: true
+  isProduction: true,
+  common: {
+    port: process.env.PORT
+  }
 };
