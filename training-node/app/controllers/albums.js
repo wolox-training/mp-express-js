@@ -9,3 +9,8 @@ exports.findAll = (request, response, next) =>
       response.send(albums);
     })
     .catch(next);
+
+exports.buy = (request, response, next) => {
+  response.status(200);
+  response.end();
+};
