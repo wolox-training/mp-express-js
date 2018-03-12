@@ -26,3 +26,14 @@ exports.createOrUpdate = user =>
       }
     })
     .catch(errorHandler.notifyErrorDatabase);
+
+exports.generateNewToken = user => {
+  let newToken = Math.floor(Math.random() * 100 + 1);
+  if (user.tokenKey === newToken) {
+    newToken++;
+  }
+  const toUpdate = {};
+  toUpdate.tokenKey = newToken;
+  toUpdate.email = user.email;
+  return exports.update(toUpdate);
+};
