@@ -1,6 +1,20 @@
 const albumsServices = require('../services/albums'),
+  userServices = require('../services/user'),
   errors = require('../errors'),
-  logger = require('../logger');
+  logger = require('../logger'),
+  constants = require('./constants');
+
+const validateSameOrAdmin = (logged, userId) => {
+  const validation = {
+    isValid: true,
+    messages: []
+  };
+  if (logged.typeUser !== constants.USER_ADMIN && logged.id !== userId) {
+    validation.isValid = false;
+    validation.messages.push({ message: 'User does not have permission' });
+  }
+  return validation;
+};
 
 exports.findAll = (request, response, next) =>
   albumsServices
@@ -22,4 +36,26 @@ exports.buy = (request, response, next) => {
       response.end();
     })
     .catch(next);
+};
+
+exports.findByUser = (request, response, next) => {
+  const validation = validateSameOrAdmin(request.userLogged, parseInt(request.params.userId));
+  if (validation.isValid) {
+    return userServices
+      .findUniqueBy({ id: request.params.userId })
+      .then(user => {
+        if (user) {
+          return albumsServices.purchasedAlbums(user.id);
+        } else {
+          return Promise.reject(errors.badRequest('User not found'));
+        }
+      })
+      .then(albums => {
+        response.status(200);
+        response.send(albums);
+      })
+      .catch(next);
+  } else {
+    next(errors.badRequest(validation.messages));
+  }
 };

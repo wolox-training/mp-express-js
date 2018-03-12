@@ -46,7 +46,8 @@ const config = {
     rollbar: {
       accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
       environment: process.env.ROLLBAR_ENV
-    }
+    },
+    apiExternal: process.env.API_EXTERNAL
   }
 };
 
