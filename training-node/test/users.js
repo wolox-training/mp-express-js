@@ -192,22 +192,23 @@ describe('users', () => {
           done();
         });
     });
-    it('should fail authorization because of expiration token', done => {
+    it('should fail authorization because of expiration token', done =>
       exports.successAdminAuth().then(response => {
         const token = response.headers[tokenManager.HEADER_NAME];
-        setTimeout(() => {
-          chai
-            .request(server)
-            .get('/users')
-            .set(tokenManager.HEADER_NAME, token)
-            .catch(err => {
-              err.response.should.have.status(401);
-              err.response.body.should.have.property('error');
-              done();
-            });
-        }, 1000);
-      });
-    });
+        return setTimeout(
+          () =>
+            chai
+              .request(server)
+              .get('/users')
+              .set(tokenManager.HEADER_NAME, token)
+              .catch(err => {
+                err.response.should.have.status(401);
+                err.response.body.should.have.property('error');
+                done();
+              }),
+          2000
+        );
+      })).timeout(3000);
   });
   describe('/users GET', () => {
     it('should success search ', done => {
