@@ -3,6 +3,7 @@ const request = require('request-promise'),
   errors = require('../errors'),
   logger = require('../logger'),
   UserAlbum = require('../models').userAlbums,
+  userServices = require('./user'),
   errorHandler = require('./errorHandler');
 
 const errorRequest = err => {
@@ -30,3 +31,8 @@ exports.get = albumId =>
     json: true,
     uri: `${albumsURL}/${albumId}`
   }).catch(errorRequest);
+
+exports.purchasedAlbums = userId =>
+  UserAlbum.findAll({ where: { userId } })
+    .then(albumsDB => Promise.all(albumsDB.map(album => exports.get(album.albumId))))
+    .catch(errorHandler.notifyErrorDatabase);
