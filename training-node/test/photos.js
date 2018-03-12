@@ -51,10 +51,10 @@ const buyAlbum = (token, id = 5) =>
 
 describe('photos', () => {
   describe('/users/albums/:id/photos GET', () => {
-    it('should success search of photos (regular user)', done => {
+    it('should success search of photos (regular user)', done =>
       usersTest.successCommonAuth().then(res => {
         const TOKEN = res.headers[tokenManager.HEADER_NAME];
-        buyAlbum(TOKEN).then(() => {
+        return buyAlbum(TOKEN).then(() =>
           chai
             .request(server)
             .get('/users/albums/5/photos')
@@ -64,14 +64,13 @@ describe('photos', () => {
               response.should.have.status(200);
               response.body.should.have.length(3);
               done();
-            });
-        });
-      });
-    });
-    it('should success search of photos (admin user)', done => {
+            })
+        );
+      }));
+    it('should success search of photos (admin user)', done =>
       usersTest.successAdminAuth().then(res => {
         const TOKEN = res.headers[tokenManager.HEADER_NAME];
-        buyAlbum(TOKEN).then(() => {
+        return buyAlbum(TOKEN).then(() =>
           chai
             .request(server)
             .get('/users/albums/5/photos')
@@ -80,14 +79,13 @@ describe('photos', () => {
               response.should.have.status(200);
               response.body.should.have.length(3);
               done();
-            });
-        });
-      });
-    });
-    it('should fail search of photos because not purchase this album', done => {
+            })
+        );
+      }));
+    it('should fail search of photos because not purchase this album', done =>
       usersTest.successAdminAuth().then(res => {
         const TOKEN = res.headers[tokenManager.HEADER_NAME];
-        buyAlbum(TOKEN).then(() => {
+        return buyAlbum(TOKEN).then(() =>
           chai
             .request(server)
             .get('/users/albums/11/photos')
@@ -96,11 +94,10 @@ describe('photos', () => {
               err.response.should.have.status(400);
               err.response.body.should.have.property('error');
               done();
-            });
-        });
-      });
-    });
-    it('should fail search of photos because user is not authorized', done => {
+            })
+        );
+      }));
+    it('should fail search of photos because user is not authorized', done =>
       chai
         .request(server)
         .get('/users/albums/11/photos')
@@ -108,7 +105,6 @@ describe('photos', () => {
           err.response.should.have.status(401);
           err.response.body.should.have.property('error');
           done();
-        });
-    });
+        }));
   });
 });
