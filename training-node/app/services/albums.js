@@ -32,13 +32,7 @@ exports.get = albumId =>
     uri: `${albumsURL}/${albumId}`
   }).catch(errorRequest);
 
-exports.purchasedAlbums = condition =>
-  userServices.findUniqueBy({ id: condition.userId }).then(user => {
-    if (user) {
-      return UserAlbum.findAll({ where: condition })
-        .then(albumsDB => Promise.all(albumsDB.map(album => exports.get(album.albumId))))
-        .catch(errorHandler.notifyErrorDatabase);
-    } else {
-      return Promise.reject(errors.badRequest('User not found'));
-    }
-  });
+exports.purchasedAlbums = userId =>
+  UserAlbum.findAll({ where: { userId } })
+    .then(albumsDB => Promise.all(albumsDB.map(album => exports.get(album.albumId))))
+    .catch(errorHandler.notifyErrorDatabase);
