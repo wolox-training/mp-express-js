@@ -37,13 +37,12 @@ const invalidate = token =>
 
 describe('users', () => {
   describe('/users POST', () => {
-    it('should success creation ', done => {
+    it('should success creation ', done =>
       exports.successUserCreate().then(res => {
         dictum.chai(res);
         done();
-      });
-    });
-    it('should fail creation because of missing parameter password', done => {
+      }));
+    it('should fail creation because of missing parameter password', done =>
       chai
         .request(server)
         .post('/users')
@@ -53,9 +52,8 @@ describe('users', () => {
           err.response.should.be.json;
           err.response.body.should.have.property('error');
           done();
-        });
-    });
-    it('should fail creation because of missing parameter name', done => {
+        }));
+    it('should fail creation because of missing parameter name', done =>
       chai
         .request(server)
         .post('/users')
@@ -65,9 +63,8 @@ describe('users', () => {
           err.response.should.be.json;
           err.response.body.should.have.property('error');
           done();
-        });
-    });
-    it('should fail creation because of missing parameter lastName', done => {
+        }));
+    it('should fail creation because of missing parameter lastName', done =>
       chai
         .request(server)
         .post('/users')
@@ -77,9 +74,8 @@ describe('users', () => {
           err.response.should.be.json;
           err.response.body.should.have.property('error');
           done();
-        });
-    });
-    it('should fail creation because of missing parameter email', done => {
+        }));
+    it('should fail creation because of missing parameter email', done =>
       chai
         .request(server)
         .post('/users')
@@ -89,9 +85,8 @@ describe('users', () => {
           err.response.should.be.json;
           err.response.body.should.have.property('error');
           done();
-        });
-    });
-    it('should fail creation because password does not meet requirements', done => {
+        }));
+    it('should fail creation because password does not meet requirements', done =>
       chai
         .request(server)
         .post('/users')
@@ -101,10 +96,9 @@ describe('users', () => {
           err.response.should.be.json;
           err.response.body.should.have.property('error');
           done();
-        });
-    });
-    it('should fail creation because email already exist', done => {
-      exports.successUserCreate().then(() => {
+        }));
+    it('should fail creation because email already exist', done =>
+      exports.successUserCreate().then(() =>
         chai
           .request(server)
           .post('/users')
@@ -114,24 +108,22 @@ describe('users', () => {
             err.response.should.be.json;
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
+          })
+      ));
   });
 
   describe('/users/sessions POST', () => {
-    it('should success auth ', done => {
-      exports.successUserCreate().then(res => {
+    it('should success auth ', done =>
+      exports.successUserCreate().then(res =>
         exports.successUserAuth().then(response => {
           dictum.chai(response);
           response.should.have.status(200);
           response.header.should.have.property(tokenManager.HEADER_NAME).should.not.be.null;
           done();
-        });
-      });
-    });
-    it('should fail auth because incorrect password', done => {
-      exports.successUserCreate().then(res => {
+        })
+      ));
+    it('should fail auth because incorrect password', done =>
+      exports.successUserCreate().then(res =>
         chai
           .request(server)
           .post('/users/sessions')
@@ -141,11 +133,10 @@ describe('users', () => {
             err.response.should.be.json;
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail auth because of missing property password', done => {
-      exports.successUserCreate().then(res => {
+          })
+      ));
+    it('should fail auth because of missing property password', done =>
+      exports.successUserCreate().then(res =>
         chai
           .request(server)
           .post('/users/sessions')
@@ -155,11 +146,10 @@ describe('users', () => {
             err.response.should.be.json;
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail auth because of missing property email', done => {
-      exports.successUserCreate().then(res => {
+          })
+      ));
+    it('should fail auth because of missing property email', done =>
+      exports.successUserCreate().then(res =>
         chai
           .request(server)
           .post('/users/sessions')
@@ -169,11 +159,10 @@ describe('users', () => {
             err.response.should.be.json;
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail auth because is an invalid email', done => {
-      exports.successUserCreate().then(res => {
+          })
+      ));
+    it('should fail auth because is an invalid email', done =>
+      exports.successUserCreate().then(res =>
         chai
           .request(server)
           .post('/users/sessions')
@@ -183,10 +172,9 @@ describe('users', () => {
             err.response.should.be.json;
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail auth because user does not exist', done => {
+          })
+      ));
+    it('should fail auth because user does not exist', done =>
       chai
         .request(server)
         .post('/users/sessions')
@@ -196,14 +184,13 @@ describe('users', () => {
           err.response.should.be.json;
           err.response.body.should.have.property('error');
           done();
-        });
-    });
+        }));
     it('should fail authorization because of expiration token', done => {
       config.common.session.expiration = 1;
-      exports.successAdminAuth().then(response => {
+      return exports.successAdminAuth().then(response => {
         const token = response.headers[tokenManager.HEADER_NAME];
-        setTimeout(() => {
-          chai
+        return setTimeout(() => {
+          return chai
             .request(server)
             .get('/users')
             .set(tokenManager.HEADER_NAME, token)
@@ -218,12 +205,12 @@ describe('users', () => {
     });
   });
   describe('/users GET', () => {
-    it('should success search ', done => {
-      exports.successUserCreate().then(res => {
+    it('should success search ', done =>
+      exports.successUserCreate().then(res =>
         exports.successUserAuth().then(response => {
           const token = response.headers[tokenManager.HEADER_NAME];
 
-          chai
+          return chai
             .request(server)
             .get('/users?offset=0&limit=2')
             .set(tokenManager.HEADER_NAME, token)
@@ -235,10 +222,9 @@ describe('users', () => {
               result.body.should.have.property('total');
               done();
             });
-        });
-      });
-    });
-    it('should fail search because is not authenticated', done => {
+        })
+      ));
+    it('should fail search because is not authenticated', done =>
       chai
         .request(server)
         .get('/users')
@@ -246,9 +232,8 @@ describe('users', () => {
           err.response.should.have.status(401);
           err.response.body.should.have.property('error');
           done();
-        });
-    });
-    it('should fail search because of bad token', done => {
+        }));
+    it('should fail search because of bad token', done =>
       chai
         .request(server)
         .get('/users')
@@ -257,12 +242,11 @@ describe('users', () => {
           err.response.should.have.status(401);
           err.response.body.should.have.property('error');
           done();
-        });
-    });
+        }));
   });
   describe('/users/admin POST', () => {
-    it('should success admin creation ', done => {
-      exports.successAdminAuth().then(response => {
+    it('should success admin creation ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -277,11 +261,10 @@ describe('users', () => {
             dictum.chai(res);
             res.should.have.status(200);
             done();
-          });
-      });
-    });
-    it('should success admin update ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should success admin update ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -295,11 +278,10 @@ describe('users', () => {
           .then(res => {
             res.should.have.status(200);
             done();
-          });
-      });
-    });
-    it('should fail admin update/create because of missing field name ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should fail admin update/create because of missing field name ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -313,11 +295,10 @@ describe('users', () => {
             err.response.should.have.status(400);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin update/create because of missing field lastName ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should fail admin update/create because of missing field lastName ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -331,11 +312,10 @@ describe('users', () => {
             err.response.should.have.status(400);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin update/create because of missing field password ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should fail admin update/create because of missing field password ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -349,11 +329,10 @@ describe('users', () => {
             err.response.should.have.status(400);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin update/create because of missing field email ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should fail admin update/create because of missing field email ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -367,11 +346,10 @@ describe('users', () => {
             err.response.should.have.status(400);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin update/create because of invalid field email ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should fail admin update/create because of invalid field email ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -386,11 +364,10 @@ describe('users', () => {
             err.response.should.have.status(400);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin update/create because of invalid field password ', done => {
-      exports.successAdminAuth().then(response => {
+          })
+      ));
+    it('should fail admin update/create because of invalid field password ', done =>
+      exports.successAdminAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -405,11 +382,10 @@ describe('users', () => {
             err.response.should.have.status(400);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin creation because user does not have permissions', done => {
-      exports.successCommonAuth().then(response => {
+          })
+      ));
+    it('should fail admin creation because user does not have permissions', done =>
+      exports.successCommonAuth().then(response =>
         chai
           .request(server)
           .post('/users/admin')
@@ -424,10 +400,9 @@ describe('users', () => {
             err.response.should.have.status(401);
             err.response.body.should.have.property('error');
             done();
-          });
-      });
-    });
-    it('should fail admin creation because user is not authenticated', done => {
+          })
+      ));
+    it('should fail admin creation because user is not authenticated', done =>
       chai
         .request(server)
         .post('/users/admin')
@@ -441,8 +416,7 @@ describe('users', () => {
           err.response.should.have.status(401);
           err.response.body.should.have.property('error');
           done();
-        });
-    });
+        }));
   });
 });
 describe('/users/sessions/invalidate_all POST', () => {
@@ -468,7 +442,7 @@ describe('/users/sessions/invalidate_all POST', () => {
       const token = auth.headers[tokenManager.HEADER_NAME];
       return invalidate(token).then(res => {
         res.should.have.status(200);
-        chai
+        return chai
           .request(server)
           .post('/users/admin')
           .set(tokenManager.HEADER_NAME, token)
