@@ -193,7 +193,6 @@ describe('users', () => {
         });
     });
     it('should fail authorization because of expiration token', done => {
-      config.common.session.expiration = 1;
       exports.successAdminAuth().then(response => {
         const token = response.headers[tokenManager.HEADER_NAME];
         setTimeout(() => {
@@ -205,7 +204,6 @@ describe('users', () => {
               err.response.should.have.status(401);
               err.response.body.should.have.property('error');
               done();
-              config.common.session.expiration = 300;
             });
         }, 1000);
       });

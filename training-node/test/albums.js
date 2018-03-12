@@ -185,12 +185,12 @@ describe('albums', () => {
       });
     });
     it('should fail list of albums without admin permission (other albums)', done => {
-      usersTest.successCommonAuth().then(authAdmin => {
-        const tokenCommon = authAdmin.headers[tokenManager.HEADER_NAME];
-        return usersTest.successUserCreate().then(() => {
-          usersTest.successUserAuth().then(res => {
-            const tokenUser = res.headers[tokenManager.HEADER_NAME];
-            buyAlbum(tokenUser).then(() => {
+      return usersTest.successUserCreate().then(() => {
+        usersTest.successUserAuth().then(res => {
+          const tokenUser = res.headers[tokenManager.HEADER_NAME];
+          buyAlbum(tokenUser).then(() => {
+            return usersTest.successCommonAuth().then(authAdmin => {
+              const tokenCommon = authAdmin.headers[tokenManager.HEADER_NAME];
               chai
                 .request(server)
                 .get('/users/3/albums')

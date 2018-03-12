@@ -1,13 +1,13 @@
 const jwt = require('jwt-simple'),
-  config = require('../../config'),
+  session = require('../../config').common.session,
   logger = require('../logger');
 
-const SECRET = config.common.session.secret;
+const SECRET = session.secret;
 
-exports.HEADER_NAME = config.common.session.header_name;
+exports.HEADER_NAME = session.header_name;
 
 exports.encode = email => {
-  const expiration = parseInt(config.common.session.expiration);
+  const expiration = parseInt(session.expiration);
   const nbf = parseInt(Date.now() / 1000);
   logger.info(`About to generate token with expiration of ${expiration} seconds`);
   return jwt.encode({ exp: nbf + expiration, nbf, email }, SECRET);
