@@ -29,6 +29,12 @@ exports.successCommonAuth = () =>
     .post('/users/sessions')
     .send({ email: 'common@wolox.com.ar', password: '1234567a' });
 
+const invalidate = token =>
+  chai
+    .request(server)
+    .post('/users/sessions/invalidate_all')
+    .set(tokenManager.HEADER_NAME, token);
+
 describe('users', () => {
   describe('/users POST', () => {
     it('should success creation ', done => {
@@ -438,4 +444,45 @@ describe('users', () => {
         });
     });
   });
+});
+describe('/users/sessions/invalidate_all POST', () => {
+  it('should success invalidate_all ', done =>
+    exports.successAdminAuth().then(auth =>
+      invalidate(auth.headers[tokenManager.HEADER_NAME]).then(res => {
+        res.should.have.status(200);
+        dictum.chai(res);
+        done();
+      })
+    ));
+  it('should fail invalidate_all because is not authenticated', done =>
+    chai
+      .request(server)
+      .post('/users/sessions/invalidate_all')
+      .catch(err => {
+        err.response.should.have.status(401);
+        err.response.body.should.have.property('error');
+        done();
+      }));
+  it('should success invalidate_all and fail service with same token because its invalidated ', done =>
+    exports.successAdminAuth().then(auth => {
+      const token = auth.headers[tokenManager.HEADER_NAME];
+      return invalidate(token).then(res => {
+        res.should.have.status(200);
+        chai
+          .request(server)
+          .post('/users/admin')
+          .set(tokenManager.HEADER_NAME, token)
+          .send({
+            name: 'common',
+            lastName: 'common',
+            email: 'common@wolox.com.ar',
+            password: '12345678a'
+          })
+          .catch(err => {
+            err.response.should.have.status(401);
+            err.response.body.should.have.property('error');
+            done();
+          });
+      });
+    }));
 });
