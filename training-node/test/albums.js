@@ -149,27 +149,29 @@ describe('albums', () => {
         usersTest.successUserAuth().then(res => {
           const TOKEN = res.headers[tokenManager.HEADER_NAME];
           buyAlbum(TOKEN).then(() => {
-            chai
-              .request(server)
-              .get('/users/3/albums')
-              .set(tokenManager.HEADER_NAME, TOKEN)
-              .then(response => {
-                response.should.have.status(200);
-                response.body.should.have.length(1);
-                dictum.chai(response);
-                done();
-              });
+            usersTest.successUserAuth().then(auth => {
+              chai
+                .request(server)
+                .get('/users/3/albums')
+                .set(tokenManager.HEADER_NAME, auth.headers[tokenManager.HEADER_NAME])
+                .then(response => {
+                  response.should.have.status(200);
+                  response.body.should.have.length(1);
+                  dictum.chai(response);
+                  done();
+                });
+            });
           });
         });
       });
     });
     it('should success list of albums with admin permission (other albums)', done => {
-      usersTest.successAdminAuth().then(authAdmin => {
-        const tokenAdmin = authAdmin.headers[tokenManager.HEADER_NAME];
-        return usersTest.successUserCreate().then(() => {
-          usersTest.successUserAuth().then(res => {
-            const tokenCommon = res.headers[tokenManager.HEADER_NAME];
-            buyAlbum(tokenCommon).then(() => {
+      return usersTest.successUserCreate().then(() => {
+        usersTest.successUserAuth().then(res => {
+          const tokenCommon = res.headers[tokenManager.HEADER_NAME];
+          buyAlbum(tokenCommon).then(() => {
+            usersTest.successAdminAuth().then(authAdmin => {
+              const tokenAdmin = authAdmin.headers[tokenManager.HEADER_NAME];
               chai
                 .request(server)
                 .get('/users/3/albums')
