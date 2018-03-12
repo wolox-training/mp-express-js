@@ -194,7 +194,7 @@ describe('users', () => {
     });
     it('should fail authorization because of expiration token', done => {
       config.common.session.expiration = 1;
-      successAdminAuth().then(response => {
+      exports.successAdminAuth().then(response => {
         const token = response.headers[tokenManager.HEADER_NAME];
         setTimeout(() => {
           chai
