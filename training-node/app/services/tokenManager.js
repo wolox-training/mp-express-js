@@ -7,11 +7,10 @@ const SECRET = config.common.session.secret;
 exports.HEADER_NAME = config.common.session.header_name;
 
 exports.encode = email => {
-  const expiration = config.common.session.expiration;
+  const expiration = parseInt(config.common.session.expiration);
+  const nbf = parseInt(Date.now() / 1000);
   logger.info(`About to generate token with expiration of ${expiration} seconds`);
-  const nbf = Date.now() / 1000;
-  const payload = { exp: parseInt(nbf) + parseInt(expiration), nbf, email };
-  return jwt.encode(payload, SECRET);
+  return jwt.encode({ exp: nbf + expiration, nbf, email }, SECRET);
 };
 
 exports.decode = token => jwt.decode(token, SECRET);
