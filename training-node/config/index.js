@@ -46,7 +46,7 @@ const config = {
       accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
       environment: process.env.ROLLBAR_ENV
     },
-    apiExternal: 'https://jsonplaceholder.typicode.com'
+    apiExternal: process.env.API_EXTERNAL
   }
 };
 
