@@ -1,5 +1,6 @@
 const users = require('./controllers/user'),
   albums = require('./controllers/albums'),
+  photos = require('./controllers/photos'),
   userMiddle = require('./middlewares/user'),
   auth = require('./middlewares/auth');
 
@@ -11,4 +12,5 @@ exports.init = app => {
   app.get('/albums', [auth.require], albums.findAll);
   app.post('/albums/:albumId', [auth.require], albums.buy);
   app.get('/users/:userId/albums', [auth.require], albums.findByUser);
+  app.get('/users/albums/:albumId/photos', [auth.require], photos.findByAlbum);
 };

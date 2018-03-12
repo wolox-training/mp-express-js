@@ -4,9 +4,10 @@ const chai = require('chai'),
   usersTest = require('./users'),
   should = chai.should(),
   tokenManager = require('../app/services/tokenManager'),
+  config = require('../config'),
   nock = require('nock');
 
-nock('https://jsonplaceholder.typicode.com')
+nock(config.common.apiExternal)
   .get('/albums')
   .reply(200, [
     {
@@ -26,7 +27,7 @@ nock('https://jsonplaceholder.typicode.com')
     }
   ]);
 
-nock('https://jsonplaceholder.typicode.com')
+nock(config.common.apiExternal)
   .get('/albums/1')
   .reply(200, {
     userId: 1,
@@ -34,7 +35,7 @@ nock('https://jsonplaceholder.typicode.com')
     title: 'quidem molestiae enim'
   });
 
-nock('https://jsonplaceholder.typicode.com')
+nock(config.common.apiExternal)
   .get('/albums/1')
   .times(8)
   .reply(200, {
@@ -43,7 +44,7 @@ nock('https://jsonplaceholder.typicode.com')
     title: 'quidem molestiae enim'
   });
 
-nock('https://jsonplaceholder.typicode.com')
+nock(config.common.apiExternal)
   .get('/albums/2')
   .reply(200, {
     userId: 1,
@@ -51,7 +52,7 @@ nock('https://jsonplaceholder.typicode.com')
     title: 'sunt qui excepturi placeat culpa'
   });
 
-nock('https://jsonplaceholder.typicode.com')
+nock(config.common.apiExternal)
   .get('/albums/3')
   .reply(200, {
     userId: 1,
@@ -59,7 +60,7 @@ nock('https://jsonplaceholder.typicode.com')
     title: 'omnis laborum odio'
   });
 
-nock('https://jsonplaceholder.typicode.com')
+nock(config.common.apiExternal)
   .get('/albums/4')
   .reply(404, {});
 
