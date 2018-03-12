@@ -205,6 +205,7 @@ describe('users', () => {
               err.response.should.have.status(401);
               err.response.body.should.have.property('error');
               done();
+              config.common.session.expiration = 300;
             });
         }, 1000);
       });
