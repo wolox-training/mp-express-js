@@ -436,15 +436,15 @@ describe('/users/sessions/invalidate_all POST', () => {
         err.response.body.should.have.property('error');
         done();
       }));
-  it('should success invalidate_all and fail service with same token because its invalidated ', done =>
-    exports.successAdminAuth().then(auth => {
-      const token = auth.headers[tokenManager.HEADER_NAME];
-      return invalidate(token).then(res => {
+  it('should success invalidate_all and fail service with any prev token because its invalidated ', done =>
+    Promise.all([exports.successAdminAuth(), exports.successAdminAuth()]).then(authsRes => {
+      const tokens = authsRes.map(auth => auth.headers[tokenManager.HEADER_NAME]);
+      return invalidate(tokens[0]).then(res => {
         res.should.have.status(200);
         return chai
           .request(server)
           .post('/users/admin')
-          .set(tokenManager.HEADER_NAME, token)
+          .set(tokenManager.HEADER_NAME, tokens[1])
           .send({
             name: 'common',
             lastName: 'common',
