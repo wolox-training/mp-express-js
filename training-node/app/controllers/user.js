@@ -5,7 +5,8 @@ const userServices = require('../services/user'),
   bcrypt = require('bcrypt'),
   tokenManager = require('../services/tokenManager'),
   validations = require('./validations'),
-  SALT_ROUNDS = 10;
+  SALT_ROUNDS = 10,
+  config = require('../../config');
 
 const validateUser = (user, userLogged, role) => {
   const validation = {
@@ -85,7 +86,7 @@ exports.login = (request, response, next) => {
           const token = tokenManager.encode(userData.email);
           response.status(200);
           response.set(tokenManager.HEADER_NAME, token);
-          response.end();
+          response.send({ tokenTTL: config.common.session.expiration });
         } else {
           next(errors.badRequest(`Invalid password for user ${userData.email}`));
         }

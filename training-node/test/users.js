@@ -1,6 +1,7 @@
 const chai = require('chai'),
   dictum = require('dictum.js'),
   server = require('./../app'),
+  config = require('./../config'),
   tokenManager = require('../app/services/tokenManager'),
   should = chai.should();
 
@@ -191,6 +192,23 @@ describe('users', () => {
           done();
         });
     });
+    it('should fail authorization because of expiration token', done =>
+      exports.successAdminAuth().then(response => {
+        const token = response.headers[tokenManager.HEADER_NAME];
+        return setTimeout(
+          () =>
+            chai
+              .request(server)
+              .get('/users')
+              .set(tokenManager.HEADER_NAME, token)
+              .catch(err => {
+                err.response.should.have.status(401);
+                err.response.body.should.have.property('error');
+                done();
+              }),
+          2000
+        );
+      })).timeout(3000);
   });
   describe('/users GET', () => {
     it('should success search ', done => {
