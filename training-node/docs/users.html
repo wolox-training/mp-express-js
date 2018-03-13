@@ -21,9 +21,9 @@
 }</pre><h5>Body</h5><pre>{
   "tokenTTL": "300"
 }</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-GET" href="#collapse-users-GET">GET /users?offset=0&limit=2</a></h4></div><div id="collapse-users-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1MzQsIm5iZiI6MTUyMDg2NzIzNCwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIn0.r6ueNmkw60TOArZWdMVPjeQkNQ7oCLMMePDpCOAaQXQ"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTIsIm5iZiI6MTUyMDg4NDE5MiwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.uC9tznxsgoEMhGHoFgKPVI-lsPgcHV-UBl2CQV678ZY"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1MzQsIm5iZiI6MTUyMDg2NzIzNCwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIn0.r6ueNmkw60TOArZWdMVPjeQkNQ7oCLMMePDpCOAaQXQ"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTIsIm5iZiI6MTUyMDg4NDE5MiwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.uC9tznxsgoEMhGHoFgKPVI-lsPgcHV-UBl2CQV678ZY"
 }</pre><h5>Body</h5><pre>{
   "results": [
     {
@@ -31,21 +31,23 @@
       "name": "admin",
       "lastName": "admin",
       "email": "admin@wolox.com.ar",
-      "password": "$2a$10$zSQd3a5PGWPODCf.utGM2uG8E026PqYBU.D2Y5zeEadO43CVwZTJm",
-      "typeUser": "A"
+      "password": "$2a$10$Fnmxs12790bhttkl9iDKduKgZp8heFbYYlAq13wCzTNfTHMG.edwe",
+      "typeUser": "A",
+      "tokenKey": 0
     },
     {
       "id": 2,
       "name": "common",
       "lastName": "common",
       "email": "common@wolox.com.ar",
-      "password": "$2a$10$zSQd3a5PGWPODCf.utGM2uG8E026PqYBU.D2Y5zeEadO43CVwZTJm",
-      "typeUser": "R"
+      "password": "$2a$10$Fnmxs12790bhttkl9iDKduKgZp8heFbYYlAq13wCzTNfTHMG.edwe",
+      "typeUser": "R",
+      "tokenKey": 0
     }
   ],
   "total": 3
 }</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-admin-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-admin-POST" href="#collapse-users-admin-POST">POST /users/admin</a></h4></div><div id="collapse-users-admin-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-admin-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1MzYsIm5iZiI6MTUyMDg2NzIzNiwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIifQ.816Qz7koMKPiS8KdNJH8qfV7G6lvy1xWtW8EvvBQtpA",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTQsIm5iZiI6MTUyMDg4NDE5NCwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.khjZF-uONVu9lZULG-menejYC2K-Sb55iiIhUJdtCW8",
   "content-type": "application/json",
   "content-length": 93
 }</pre><h5>Body</h5><pre>{
@@ -54,13 +56,17 @@
   "email": "common2@wolox.com.ar",
   "password": "12345678a"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1MzYsIm5iZiI6MTUyMDg2NzIzNiwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIifQ.816Qz7koMKPiS8KdNJH8qfV7G6lvy1xWtW8EvvBQtpA",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTQsIm5iZiI6MTUyMDg4NDE5NCwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.khjZF-uONVu9lZULG-menejYC2K-Sb55iiIhUJdtCW8",
   "content-type": "application/json",
   "content-length": 93
-}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-3-albums-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-3-albums-GET" href="#collapse-users-3-albums-GET">GET /users/3/albums</a></h4></div><div id="collapse-users-3-albums-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-3-albums-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1NDMsIm5iZiI6MTUyMDg2NzI0MywiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIn0.8UXrfFnlu4rTuHb7g-P51s2xwKA8TQTljLz6kWeEACA"
+}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-sessions-invalidate_all-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-sessions-invalidate_all-POST" href="#collapse-users-sessions-invalidate_all-POST">POST /users/sessions/invalidate_all</a></h4></div><div id="collapse-users-sessions-invalidate_all-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-sessions-invalidate_all-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTksIm5iZiI6MTUyMDg4NDE5OSwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.7USFKyn6vvuyiJs9xT_-pfX-La962_9UW4dDXtcBdY0"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1NDMsIm5iZiI6MTUyMDg2NzI0MywiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIn0.8UXrfFnlu4rTuHb7g-P51s2xwKA8TQTljLz6kWeEACA"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTksIm5iZiI6MTUyMDg4NDE5OSwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.7USFKyn6vvuyiJs9xT_-pfX-La962_9UW4dDXtcBdY0"
+}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-3-albums-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-3-albums-GET" href="#collapse-users-3-albums-GET">GET /users/3/albums</a></h4></div><div id="collapse-users-3-albums-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-3-albums-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDQsIm5iZiI6MTUyMDg4NDIwNCwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.W53OW0qKwkJoGUjkUFEsCBBsgK6N9bumYOa3gCu7MNc"
+}</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDQsIm5iZiI6MTUyMDg4NDIwNCwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.W53OW0qKwkJoGUjkUFEsCBBsgK6N9bumYOa3gCu7MNc"
 }</pre><h5>Body</h5><pre>[
   {
     "userId": 1,
@@ -68,9 +74,9 @@
     "title": "quidem molestiae enim"
   }
 ]</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-albums-5-photos-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-albums-5-photos-GET" href="#collapse-users-albums-5-photos-GET">GET /users/albums/5/photos</a></h4></div><div id="collapse-users-albums-5-photos-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-albums-5-photos-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1NDUsIm5iZiI6MTUyMDg2NzI0NSwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIn0.dCBmLAjez3YPC1Bb5p4pgDEa75EmBWcCDIer7NsDQ8g"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDYsIm5iZiI6MTUyMDg4NDIwNiwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.KrF3Pe5iBUR_ccjD7LsChH_dp3e_N1gC2JQNdnjn8ic"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4Njc1NDUsIm5iZiI6MTUyMDg2NzI0NSwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIn0.dCBmLAjez3YPC1Bb5p4pgDEa75EmBWcCDIer7NsDQ8g"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDYsIm5iZiI6MTUyMDg4NDIwNiwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.KrF3Pe5iBUR_ccjD7LsChH_dp3e_N1gC2JQNdnjn8ic"
 }</pre><h5>Body</h5><pre>[
   {
     "albumId": 5,

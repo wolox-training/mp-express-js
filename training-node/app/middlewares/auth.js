@@ -17,11 +17,11 @@ exports.require = (request, response, next) => {
       return userServices
         .findUniqueBy({ email: payload.email })
         .then(user => {
-          if (user) {
+          if (user && user.tokenKey === payload.tokenKey) {
             request.userLogged = user;
             next();
           } else {
-            next(errors.unauthorized('User not found'));
+            next(errors.unauthorized(user ? 'Invalid token' : 'User not found'));
           }
         })
         .catch(e => next(errors.defaultError('Error fetching user')));

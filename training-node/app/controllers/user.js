@@ -83,7 +83,7 @@ exports.login = (request, response, next) => {
         const same = bcrypt.compareSync(userData.password, user.password);
         if (same) {
           logger.info(`Success login for user ${userData.email}`);
-          const token = tokenManager.encode(userData.email);
+          const token = tokenManager.encode(user);
           response.status(200);
           response.set(tokenManager.HEADER_NAME, token);
           response.send({ tokenTTL: config.common.session.expiration });
@@ -110,6 +110,19 @@ exports.findAll = (request, response, next) => {
 exports.createUpdateAdmin = (request, response, next) => {
   return createUpdateUser(request.user, request.userLogged, constants.USER_ADMIN, 'createOrUpdate')
     .then(userCreated => {
+      response.status(200).end();
+    })
+    .catch(next);
+};
+
+exports.invalidateSessions = (request, response, next) => {
+  const userId = request.userLogged.id;
+  logger.info(`User with id ${userId} request for invalidate all sessions`);
+  return userServices
+    .findUniqueBy({ id: userId })
+    .then(userServices.generateNewToken)
+    .then(() => {
+      logger.info(`Success to invalidate sessions for user with id ${userId}`);
       response.status(200).end();
     })
     .catch(next);

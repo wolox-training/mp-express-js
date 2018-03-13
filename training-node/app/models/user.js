@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) =>
       typeUser: {
         type: DataTypes.STRING(1),
         allowNull: false
-      }
+      },
+      tokenKey: { type: DataTypes.STRING, defaultValue: '0', allowNull: false }
     },
     {
       timestamps: false
