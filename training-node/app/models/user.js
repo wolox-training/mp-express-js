@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) =>
         type: DataTypes.STRING(1),
         allowNull: false
       },
-      tokenKey: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false }
+      tokenKey: { type: DataTypes.STRING, defaultValue: '0', allowNull: false }
     },
     {
       timestamps: false

@@ -2,7 +2,8 @@ const User = require('../models').users,
   errors = require('../errors'),
   logger = require('../logger'),
   Sequelize = require('sequelize'),
-  errorHandler = require('./errorHandler');
+  errorHandler = require('./errorHandler'),
+  bcrypt = require('bcrypt');
 
 exports.create = user => User.create(user).catch(errorHandler.handleValidationError);
 
@@ -28,12 +29,18 @@ exports.createOrUpdate = user =>
     .catch(errorHandler.notifyErrorDatabase);
 
 exports.generateNewToken = user => {
-  let newToken = Math.floor(Math.random() * 100 + 1);
-  if (user.tokenKey === newToken) {
-    newToken++;
-  }
-  const toUpdate = {};
-  toUpdate.tokenKey = newToken;
-  toUpdate.email = user.email;
-  return exports.update(toUpdate);
+  return bcrypt
+    .genSalt()
+    .then(newToken => {
+      if (user.tokenKey === newToken) {
+        return bcrypt.genSalt();
+      }
+      return newToken;
+    })
+    .then(newToken => {
+      const toUpdate = {};
+      toUpdate.tokenKey = newToken;
+      toUpdate.email = user.email;
+      return exports.update(toUpdate);
+    });
 };

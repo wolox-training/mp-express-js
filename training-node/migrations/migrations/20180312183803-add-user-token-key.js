@@ -3,9 +3,9 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.addColumn('users', 'tokenKey', {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: '0'
     }),
 
   down: (queryInterface, Sequelize) => queryInterface.removeColumn('users', 'tokenKey')
