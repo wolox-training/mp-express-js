@@ -31,6 +31,19 @@ const invalidate = token =>
     .post('/users/sessions/invalidate_all')
     .set(tokenManager.HEADER_NAME, token);
 
+const validatePage = (token, offset, limit) =>
+  chai
+    .request(server)
+    .get(`/users?limit=${limit}&offset=${offset}`)
+    .set(tokenManager.HEADER_NAME, token)
+    .then(result => {
+      result.should.have.status(200);
+      result.body.should.have.property('results');
+      result.body.results.should.have.length(limit);
+      result.body.should.have.property('total');
+      return result;
+    });
+
 describe('users', () => {
   describe('/users POST', () => {
     it('should success creation ', done =>
@@ -204,22 +217,19 @@ describe('users', () => {
   });
   describe('/users GET', () => {
     it('should success search ', done =>
-      exports.successCommonAuth().then(response => {
-        const token = response.headers[tokenManager.HEADER_NAME];
+      usersFactory
+        .createMultiple(100)
+        .then(() => exports.successCommonAuth())
+        .then(response => validatePage(response.headers[tokenManager.HEADER_NAME], 0, 20))
+        .then(() => userAuth({ email: 'common@wolox.com.ar' }))
+        .then(response => validatePage(response.headers[tokenManager.HEADER_NAME], 20, 40))
+        .then(() => userAuth({ email: 'common@wolox.com.ar' }))
+        .then(response => validatePage(response.headers[tokenManager.HEADER_NAME], 40, 60))
 
-        return chai
-          .request(server)
-          .get('/users?offset=0&limit=2')
-          .set(tokenManager.HEADER_NAME, token)
-          .then(result => {
-            dictum.chai(result);
-            result.should.have.status(200);
-            result.body.should.have.property('results');
-            result.body.results.should.have.length(1);
-            result.body.should.have.property('total');
-            done();
-          });
-      }));
+        .then(res => {
+          dictum.chai(res);
+          done();
+        })).timeout(8000);
     it('should fail search because is not authenticated', done =>
       chai
         .request(server)

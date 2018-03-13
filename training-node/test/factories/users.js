@@ -16,6 +16,8 @@ factory.define('User', Models.users, {
 
 exports.createUser = (options = {}) => factory.create('User', options, {});
 
+exports.createMultiple = num => factory.createMany('User', num);
+
 exports.buildUser = (options = {}) => factory.build('User', options, {});
 
 exports.factory = factory;

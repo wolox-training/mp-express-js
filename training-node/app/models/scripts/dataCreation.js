@@ -1,1 +1,1 @@
-exports.execute = () => {};
+exports.execute = () => Promise.resolve();
