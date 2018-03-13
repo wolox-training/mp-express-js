@@ -83,28 +83,33 @@ describe('users', () => {
           done();
         }));
     it('should fail creation because password does not meet requirements', done =>
-      chai
-        .request(server)
-        .post('/users')
-        .send({ name: 'martin', lastName: 'picollo', email: 'martin2@wolox.com.ar', password: '123' })
-        .catch(err => {
-          err.should.have.status(400);
-          err.response.should.be.json;
-          err.response.body.should.have.property('error');
-          done();
-        }));
-    it('should fail creation because email already exist', done =>
-      exports.successUserCreate().then(() =>
+      usersFactory.buildUser({ password: '123' }).then(user =>
         chai
           .request(server)
           .post('/users')
-          .send({ name: 'martin', lastName: 'picollo', email: 'martin@wolox.com.ar', password: '12345678a' })
+          .send(user.dataValues)
           .catch(err => {
             err.should.have.status(400);
             err.response.should.be.json;
             err.response.body.should.have.property('error');
             done();
           })
+      ));
+
+    it('should fail creation because email already exist', done =>
+      exports.successUserCreate().then(() =>
+        usersFactory.buildUser({ email: 'martin@wolox.com.ar' }).then(user =>
+          chai
+            .request(server)
+            .post('/users')
+            .send(user.dataValues)
+            .catch(err => {
+              err.should.have.status(400);
+              err.response.should.be.json;
+              err.response.body.should.have.property('error');
+              done();
+            })
+        )
       ));
   });
 
@@ -335,21 +340,18 @@ describe('users', () => {
       ));
     it('should fail admin update/create because of invalid field email ', done =>
       exports.successAdminAuth().then(response =>
-        chai
-          .request(server)
-          .post('/users/admin')
-          .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
-          .send({
-            name: 'common',
-            lastName: 'common',
-            email: 'martin@gmail.com',
-            password: '12345678a'
-          })
-          .catch(err => {
-            err.response.should.have.status(400);
-            err.response.body.should.have.property('error');
-            done();
-          })
+        usersFactory.buildUser({ email: 'martin@gmail.com' }).then(user =>
+          chai
+            .request(server)
+            .post('/users/admin')
+            .set(tokenManager.HEADER_NAME, response.headers[tokenManager.HEADER_NAME])
+            .send(user.dataValues)
+            .catch(err => {
+              err.response.should.have.status(400);
+              err.response.body.should.have.property('error');
+              done();
+            })
+        )
       ));
     it('should fail admin update/create because of invalid field password ', done =>
       exports.successAdminAuth().then(response =>
