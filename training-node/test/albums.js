@@ -65,13 +65,10 @@ nock(config.common.apiExternal)
   .reply(404, {});
 
 const buyAlbum = (token, id = 1) =>
-  usersTest.successCommonAuth().then(res => {
-    const defaultToken = res.headers[tokenManager.HEADER_NAME];
-    return chai
-      .request(server)
-      .post(`/albums/${id}`)
-      .set(tokenManager.HEADER_NAME, token || defaultToken);
-  });
+  chai
+    .request(server)
+    .post(`/albums/${id}`)
+    .set(tokenManager.HEADER_NAME, token);
 
 describe('albums', () => {
   describe('/albums GET', () => {
@@ -101,10 +98,13 @@ describe('albums', () => {
 
   describe('/albums/:albumId POST', () => {
     it('should success buy of album ', done =>
-      buyAlbum().then(response => {
-        response.should.have.status(200);
-        dictum.chai(response);
-        done();
+      usersTest.successCommonAuth().then(res => {
+        const TOKEN = res.headers[tokenManager.HEADER_NAME];
+        return buyAlbum(TOKEN).then(response => {
+          response.should.have.status(200);
+          dictum.chai(response);
+          done();
+        });
       }));
     it('should fail buy of album because album does not exist', done =>
       usersTest.successCommonAuth().then(res => {
@@ -128,75 +128,70 @@ describe('albums', () => {
           done();
         }));
     it('should fail second buy of album because album with id 1 was already purchased', done =>
-      buyAlbum().then(() =>
-        buyAlbum().catch(err => {
-          err.response.should.have.status(400);
-          err.response.body.should.have.property('error');
-          done();
-        })
-      ));
+      usersTest.successCommonAuth().then(res => {
+        const TOKEN = res.headers[tokenManager.HEADER_NAME];
+        return buyAlbum(TOKEN).then(() =>
+          buyAlbum(TOKEN).catch(err => {
+            err.response.should.have.status(400);
+            err.response.body.should.have.property('error');
+            done();
+          })
+        );
+      }));
   });
 
   describe('/users/:userId/albums GET', () => {
     it('should success list of albums (own albums)', done =>
-      usersTest.successUserCreate().then(() =>
-        usersTest.successUserAuth().then(res => {
-          const TOKEN = res.headers[tokenManager.HEADER_NAME];
-          return buyAlbum(TOKEN).then(() =>
-            usersTest.successUserAuth().then(auth =>
-              chai
-                .request(server)
-                .get('/users/3/albums')
-                .set(tokenManager.HEADER_NAME, auth.headers[tokenManager.HEADER_NAME])
-                .then(response => {
-                  response.should.have.status(200);
-                  response.body.should.have.length(1);
-                  dictum.chai(response);
-                  done();
-                })
-            )
-          );
-        })
-      ));
+      usersTest.successCommonAuth().then(res => {
+        const TOKEN = res.headers[tokenManager.HEADER_NAME];
+        return buyAlbum(TOKEN, 1).then(() =>
+          chai
+            .request(server)
+            .get('/users/1/albums')
+            .set(tokenManager.HEADER_NAME, TOKEN)
+            .then(response => {
+              response.should.have.status(200);
+              response.body.should.have.length(1);
+              dictum.chai(response);
+              done();
+            })
+        );
+      }));
     it('should success list of albums with admin permission (other albums)', done =>
-      usersTest.successUserCreate().then(() =>
-        usersTest.successUserAuth().then(res => {
-          const tokenCommon = res.headers[tokenManager.HEADER_NAME];
-          return buyAlbum(tokenCommon).then(() =>
-            usersTest.successAdminAuth().then(authAdmin => {
-              const tokenAdmin = authAdmin.headers[tokenManager.HEADER_NAME];
-              return chai
-                .request(server)
-                .get('/users/3/albums')
-                .set(tokenManager.HEADER_NAME, tokenAdmin)
-                .then(response => {
-                  response.should.have.status(200);
-                  response.body.should.have.length(1);
-                  done();
-                });
-            })
-          );
-        })
-      ));
+      usersTest.successCommonAuth().then(res => {
+        const tokenCommon = res.headers[tokenManager.HEADER_NAME];
+        return buyAlbum(tokenCommon).then(() =>
+          usersTest.successAdminAuth().then(authAdmin => {
+            const tokenAdmin = authAdmin.headers[tokenManager.HEADER_NAME];
+            return chai
+              .request(server)
+              .get('/users/1/albums')
+              .set(tokenManager.HEADER_NAME, tokenAdmin)
+              .then(response => {
+                response.should.have.status(200);
+                response.body.should.have.length(1);
+                done();
+              });
+          })
+        );
+      }));
     it('should fail list of albums without admin permission (other albums)', done =>
-      usersTest.successUserCreate().then(() =>
-        usersTest.successUserAuth().then(res => {
-          const tokenUser = res.headers[tokenManager.HEADER_NAME];
-          return buyAlbum(tokenUser).then(() =>
-            usersTest.successCommonAuth().then(authAdmin => {
-              const tokenCommon = authAdmin.headers[tokenManager.HEADER_NAME];
-              return chai
-                .request(server)
-                .get('/users/3/albums')
-                .set(tokenManager.HEADER_NAME, tokenCommon)
-                .catch(err => {
-                  err.response.should.have.status(400);
-                  done();
-                });
-            })
-          );
-        })
-      ));
+      usersTest.successAdminAuth().then(res => {
+        const tokenUser = res.headers[tokenManager.HEADER_NAME];
+        return buyAlbum(tokenUser).then(() =>
+          usersTest.successCommonAuth().then(authAdmin => {
+            const tokenCommon = authAdmin.headers[tokenManager.HEADER_NAME];
+            return chai
+              .request(server)
+              .get('/users/3/albums')
+              .set(tokenManager.HEADER_NAME, tokenCommon)
+              .catch(err => {
+                err.response.should.have.status(400);
+                done();
+              });
+          })
+        );
+      }));
     it('should fail list of albums because user is not authorized', done =>
       chai
         .request(server)

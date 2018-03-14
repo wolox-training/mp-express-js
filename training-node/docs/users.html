@@ -1,72 +1,600 @@
 <html><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /><script src="https://code.jquery.com/jquery-1.12.2.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script><style> pre { width: 95%; } </style></head><body><div class="container"><div class="jumbotron"><h1>Users</h1></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-POST" href="#collapse-users-POST">POST /users</a></h4></div><div id="collapse-users-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
   "content-type": "application/json",
-  "content-length": 91
+  "content-length": 177
 }</pre><h5>Body</h5><pre>{
-  "name": "martin",
-  "lastName": "picollo",
-  "email": "martin@wolox.com.ar",
-  "password": "12346578q"
+  "tokenKey": "0",
+  "id": null,
+  "name": "auto",
+  "lastName": "auto",
+  "typeUser": "R",
+  "password": "$2a$10$NvtsGfCn02HX7HnycLQ3nOsx07/aZS4rmtUbWN5LevZIc3ZHLHSC2",
+  "email": "martin@wolox.com.ar"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
   "content-type": "application/json",
-  "content-length": 91
+  "content-length": 177
 }</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-sessions-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-sessions-POST" href="#collapse-users-sessions-POST">POST /users/sessions</a></h4></div><div id="collapse-users-sessions-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-sessions-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
   "content-type": "application/json",
-  "content-length": 54
+  "content-length": 53
 }</pre><h5>Body</h5><pre>{
-  "email": "martin@wolox.com.ar",
-  "password": "12346578q"
+  "email": "common@wolox.com.ar",
+  "password": "1234567a"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
   "content-type": "application/json",
-  "content-length": 54
+  "content-length": 53
 }</pre><h5>Body</h5><pre>{
-  "tokenTTL": "300"
-}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-GET" href="#collapse-users-GET">GET /users?offset=0&limit=2</a></h4></div><div id="collapse-users-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTIsIm5iZiI6MTUyMDg4NDE5MiwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.uC9tznxsgoEMhGHoFgKPVI-lsPgcHV-UBl2CQV678ZY"
+  "tokenTTL": 2
+}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-GET" href="#collapse-users-GET">GET /users?limit=60&offset=40</a></h4></div><div id="collapse-users-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUyOTMsIm5iZiI6MTUyMDk3NTI5MSwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOiIwIn0.QMh-9aOSpjNb4IbaG6KstNfUC6uFuXKo0nA1EIZAGsM"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTIsIm5iZiI6MTUyMDg4NDE5MiwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.uC9tznxsgoEMhGHoFgKPVI-lsPgcHV-UBl2CQV678ZY"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUyOTMsIm5iZiI6MTUyMDk3NTI5MSwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOiIwIn0.QMh-9aOSpjNb4IbaG6KstNfUC6uFuXKo0nA1EIZAGsM"
 }</pre><h5>Body</h5><pre>{
   "results": [
     {
-      "id": 1,
-      "name": "admin",
-      "lastName": "admin",
-      "email": "admin@wolox.com.ar",
-      "password": "$2a$10$Fnmxs12790bhttkl9iDKduKgZp8heFbYYlAq13wCzTNfTHMG.edwe",
-      "typeUser": "A",
-      "tokenKey": 0
+      "id": 41,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto42@wolox.com.ar",
+      "password": "$2a$10$iQwLDyLqhvNWhUpe5On6Ne97YdXew/UUbsB/hryr7EnnlT5c06O.e",
+      "typeUser": "R",
+      "tokenKey": "0"
     },
     {
-      "id": 2,
-      "name": "common",
-      "lastName": "common",
-      "email": "common@wolox.com.ar",
-      "password": "$2a$10$Fnmxs12790bhttkl9iDKduKgZp8heFbYYlAq13wCzTNfTHMG.edwe",
+      "id": 42,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto43@wolox.com.ar",
+      "password": "$2a$10$4F6gRgDwG681pO2gTBBZ8uX3TaiwBo.jko1w8Nq.W5uTf96Jwyk22",
       "typeUser": "R",
-      "tokenKey": 0
+      "tokenKey": "0"
+    },
+    {
+      "id": 43,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto44@wolox.com.ar",
+      "password": "$2a$10$37j4tzKImbSsD9RVrjeLHef6U04EMHQfAuqUO1YFp2f7PsoQHIcGy",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 44,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto45@wolox.com.ar",
+      "password": "$2a$10$jLiP/EUZRwUimMYZXxHpoOemzpp/foJ0MOwD0TIAmoMBeU.mwdLxa",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 45,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto46@wolox.com.ar",
+      "password": "$2a$10$qxbu1OWuT6HwwOGECoyoIe19OvgZ3wIktnu6GoLc/HPeZDX4T4Y9K",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 46,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto47@wolox.com.ar",
+      "password": "$2a$10$P7/1O6euCSdmr6XKVtgz8OR8vx7sZaWhOZN0QwmmhxomnPqPunnby",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 47,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto48@wolox.com.ar",
+      "password": "$2a$10$wClswxedrbvsn9A5v8f.ueaNyMewtGjWKQxrK13cgIkm3taroknsK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 48,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto49@wolox.com.ar",
+      "password": "$2a$10$yS4YAxlxg3nGVc/rOrjaleHB5UTu4Kr79unsutS9ZrT.6zi9o4ReK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 49,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto50@wolox.com.ar",
+      "password": "$2a$10$K2JFHJ8D7dEL9wLdLWtRLuSOKaNLh6xDbUIycXmvOq0kww7PN7hAi",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 50,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto51@wolox.com.ar",
+      "password": "$2a$10$a1jJyVyJ/eSsEC857Yv4UeMv7k2Q6AobeCF3fMaL8A.vkCqQL8.sG",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 51,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto52@wolox.com.ar",
+      "password": "$2a$10$X.d9rKHIgExvmzFG0Xgbwun0Rw.boWqlTrZiaQ.uN1lXXRsExcZBK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 52,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto53@wolox.com.ar",
+      "password": "$2a$10$iuUmWZJVQbFfEd6G3EWRQezpzKy5LALVXbTC2ji7X8rbaOz47ppqu",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 53,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto54@wolox.com.ar",
+      "password": "$2a$10$5YxwtUbs6izaQw/Riw/pI.Mcm0Tv9PKMPN7pnOF.1L5HaNOqBDBpi",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 54,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto55@wolox.com.ar",
+      "password": "$2a$10$md5iOAwh6j/uTng0Igzr8.1WZ5tjhSOUIP/9tM4tXWBzAupGH46K6",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 55,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto56@wolox.com.ar",
+      "password": "$2a$10$yDvrAd1OP8xCz5jXxYdEa.uI0iMOPc1R5ZQjkJVTm7Z7MWm2lHzYK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 56,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto57@wolox.com.ar",
+      "password": "$2a$10$SbBduwTh5c3C9DU8sWFsIuvZTgdeG0qvF2cL0D19cIPxQuBSZSSc6",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 57,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto58@wolox.com.ar",
+      "password": "$2a$10$.itJCgRi/MfupiXl48Tiduua25qnRIDU/P.2BRYnKEr.Nq7mePB7u",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 58,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto59@wolox.com.ar",
+      "password": "$2a$10$oRcqy2b38UngS2sUWqPkzOKYJkGegPvZ9dgGxWDoaSHNAYxQUlJWK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 59,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto60@wolox.com.ar",
+      "password": "$2a$10$w9mBh6NB9PqcqpZT5lriL./nri7UeWmrqpRh4/WrKMv.cfkOA08qG",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 60,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto61@wolox.com.ar",
+      "password": "$2a$10$UurGxjxHE8xn8JKUVc.70.XxbMgCtV4YM/3Cnhmn89juA8qnlMrDC",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 61,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto62@wolox.com.ar",
+      "password": "$2a$10$puYxsWtD7tjz4kG99sl2NOMx77hSfJaTfePzy2aBD9yTL0Y2K7XDe",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 62,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto63@wolox.com.ar",
+      "password": "$2a$10$wQ0xomtnZ2Dtc.dJd5f6XO4EYRtG.LAy/t.WGNSUzQV4.vXmqmNdC",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 67,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto68@wolox.com.ar",
+      "password": "$2a$10$Pouo6jg3czfs8WYy4bMQr.4WAjdzaxf9FnWAjwyOBARNze.ve.MLe",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 73,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto74@wolox.com.ar",
+      "password": "$2a$10$YIdqhb52DZsY4p5kcCwK7O//OUlbiX4xf8dbcqznM7HuxNUkuQkeG",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 80,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto81@wolox.com.ar",
+      "password": "$2a$10$kvHXXLEEs1k8czDfOaL3R.bw3idPh/p311sE0Pr7F/OfCcBqz8RhG",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 82,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto83@wolox.com.ar",
+      "password": "$2a$10$BcbXI/YLWl3Fs0y5n1XfDe1vmD8T5Q1pjFtzh8ffuD459B45ZO1He",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 87,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto88@wolox.com.ar",
+      "password": "$2a$10$wr/0PVqlbDuEiqwX./MJIu5XrAINNEectg72r56uHQMR2C.a4SR1C",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 92,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto93@wolox.com.ar",
+      "password": "$2a$10$leGEPu2WxNgEeGmYnJEZYekO7TGc63yH.wWUbSg8bdacdcIQiog2u",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 97,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto98@wolox.com.ar",
+      "password": "$2a$10$IxHrv1xJgcclLXhLdMYpZuXYwIyer1g3Wwk0D5GrMJooKit8k/kYK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 63,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto64@wolox.com.ar",
+      "password": "$2a$10$uNwaJqHtMY.7V.Ysfilx5.ysbI8/2asUQ5eXNOZkZClpNgubSXhBS",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 68,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto69@wolox.com.ar",
+      "password": "$2a$10$aZE13dHa2gldwoP9/Qpt2eXDv7OL/ClC0ksHIp0uilVoSFC4n5Llu",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 75,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto76@wolox.com.ar",
+      "password": "$2a$10$54EFG3QGl5GyBRPqdc8pO.Qqp4J7FQkcJ511HJjBMhZi7xrl/j8bO",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 78,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto79@wolox.com.ar",
+      "password": "$2a$10$J72/xbe7p6LNJdnBWL4iyupKWPB588ftfZ3Mxm3yjHxMf6.jC9idi",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 84,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto85@wolox.com.ar",
+      "password": "$2a$10$4bPQJiR2i9C0HoBLCkgFoe9xUgCye/V2ss5CSqEfXI8RUPJ75xRLm",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 88,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto89@wolox.com.ar",
+      "password": "$2a$10$9c3RO3KUKD0qIGSRr9Jez.P1FrkEv7/wzWYqYYpMcN2bsWRFBwg5e",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 96,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto97@wolox.com.ar",
+      "password": "$2a$10$42XGr3xRKIFu4wyPbQ1MOerp4Q0UA4P8A8iHBSt.82WPiih2JUO1a",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 100,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto101@wolox.com.ar",
+      "password": "$2a$10$JkTK71v22YGZJFbki7qKdue1ol5Vz3OL9Zy93IbBSYJfP4KQQGzOe",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 64,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto65@wolox.com.ar",
+      "password": "$2a$10$fpylzl.IdHAEVMJF6L6ebuQSYaRA7VTOr.CS3ewZW/hp2g23Uzu76",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 70,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto71@wolox.com.ar",
+      "password": "$2a$10$C0/dthheMT3/hNIxaamVberGIwLJlkZYh6rbg/Kz/fqdbMLyiPCYK",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 72,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto73@wolox.com.ar",
+      "password": "$2a$10$vN/4q1s5OhM5ecU8odA5YOPCDR2sV5HcZwPJviJmtx/w5uQeGEiyq",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 79,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto80@wolox.com.ar",
+      "password": "$2a$10$dNUNPFQwrXn2VEkD38ttpuH.IEnPqKAWw7EeJPKszQ.PiM1fo7zTa",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 85,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto86@wolox.com.ar",
+      "password": "$2a$10$0Qk/RJxgfmH3ibeBKA1Y2.3Qz.5psiMMtQ2B9KhkMVvgc28GOj0OS",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 89,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto90@wolox.com.ar",
+      "password": "$2a$10$nE3aBBcP.WC4OdUWxEb8IuGZI5zsM3ZDB1YlKL474wmI5.rmIH0gm",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 95,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto96@wolox.com.ar",
+      "password": "$2a$10$xZV8Y7TBiNWcECHsJijLYudkjx.PubpUoli03Wnxy.IeYpMXlyAE6",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 98,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto99@wolox.com.ar",
+      "password": "$2a$10$ma/I3uuTUkGh6LQSU5gof.Yg1QxC9q1qruQdCgYntYECkBCgCsIH2",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 65,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto66@wolox.com.ar",
+      "password": "$2a$10$BDweKDXFIg83MvcpPFiTleS0lcO66ccmSfNPwiOchd.zt1lcaDhSi",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 69,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto70@wolox.com.ar",
+      "password": "$2a$10$0hh.6rIQgkWam4tOMJ5a1u56qC2mDPUH7bzgJv3rlavoGBOTSU.jC",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 74,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto75@wolox.com.ar",
+      "password": "$2a$10$khLfFS48d6rNWp9vvWpmAed1W6iNyDFCJBkmlNThrGkQlCcWCZi1m",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 77,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto78@wolox.com.ar",
+      "password": "$2a$10$0CnhcdPEvukxFqDnoG5LzOgxBRe.EIkLU5oXTQpvFomYgicS3cLzW",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 83,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto84@wolox.com.ar",
+      "password": "$2a$10$BbagMiMmoNh7KBht8tSpI.7Hg9xFPP0hcXK6UcLYmNtn2h/P69KPq",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 90,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto91@wolox.com.ar",
+      "password": "$2a$10$MWo2UNgO40t.PcbWa3ifZ.GU7d4dg4pCSrEqh/QgFt/FZNcFzuD8q",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 94,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto95@wolox.com.ar",
+      "password": "$2a$10$TQh8cHE5h76t.k.SHUw0H.osgAhDq2n.2I6HmBDeq0TMYU./UUxN.",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 99,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto100@wolox.com.ar",
+      "password": "$2a$10$sC1w/4aGfidSpDfNqpwnIOpuNAiJ3RPimrI/PsT.20oc8S0FoqcQa",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 66,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto67@wolox.com.ar",
+      "password": "$2a$10$o0e3tBOWLwu1mn8EYUtJ0uTNkfw7Hld4BjvZhgj5UWbevdm.At672",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 71,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto72@wolox.com.ar",
+      "password": "$2a$10$6SJ02HGLaEhT6.QUfAHnm.Oe5GapfIEy7O2jgJHGhC8TbpZZWkU26",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 76,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto77@wolox.com.ar",
+      "password": "$2a$10$hioEbxWTFbXfFG8iXiHKmeNJGt3N6kiXigNYuzvGTc3sqO7Nl/2/m",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 81,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto82@wolox.com.ar",
+      "password": "$2a$10$8IMioFrM963W1Y2n3x2mNO7NOIXTZV2Y2G.3LvpJhXU/SseV1y9uW",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 86,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto87@wolox.com.ar",
+      "password": "$2a$10$IGIvADx5.FPE/n6E.YJ0DO.Yg9RmRWz4ROHhM21KMbMJhESXMTRpi",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 91,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto92@wolox.com.ar",
+      "password": "$2a$10$SILad82dtLXWkQUoZDNmqeFdFWI/iDc0DjHwvt3klIuulxdRyft9O",
+      "typeUser": "R",
+      "tokenKey": "0"
+    },
+    {
+      "id": 93,
+      "name": "auto",
+      "lastName": "auto",
+      "email": "auto94@wolox.com.ar",
+      "password": "$2a$10$aVZPw0cLwWWg9gaWw4TdMOFUddA1cLDg0O6hy1UBhgEzTYX93N45e",
+      "typeUser": "R",
+      "tokenKey": "0"
     }
   ],
-  "total": 3
+  "total": 101
 }</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-admin-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-admin-POST" href="#collapse-users-admin-POST">POST /users/admin</a></h4></div><div id="collapse-users-admin-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-admin-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTQsIm5iZiI6MTUyMDg4NDE5NCwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.khjZF-uONVu9lZULG-menejYC2K-Sb55iiIhUJdtCW8",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUyOTQsIm5iZiI6MTUyMDk3NTI5MiwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6IjAifQ.Q5rJxyLISU79OiD2ovf3YFwHekckUDAgPHL5Noyj4ZQ",
   "content-type": "application/json",
-  "content-length": 93
+  "content-length": 178
 }</pre><h5>Body</h5><pre>{
-  "name": "common2",
-  "lastName": "common2",
-  "email": "common2@wolox.com.ar",
-  "password": "12345678a"
+  "tokenKey": "0",
+  "id": null,
+  "name": "auto",
+  "lastName": "auto",
+  "email": "auto102@wolox.com.ar",
+  "typeUser": "R",
+  "password": "$2a$10$7KSf3ymis.gkNhg7YOsnwua4cbbBlCvBegCQHT2wO6wSS2V.ByYm6"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTQsIm5iZiI6MTUyMDg4NDE5NCwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.khjZF-uONVu9lZULG-menejYC2K-Sb55iiIhUJdtCW8",
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUyOTQsIm5iZiI6MTUyMDk3NTI5MiwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6IjAifQ.Q5rJxyLISU79OiD2ovf3YFwHekckUDAgPHL5Noyj4ZQ",
   "content-type": "application/json",
-  "content-length": 93
+  "content-length": 178
 }</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-sessions-invalidate_all-POST"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-sessions-invalidate_all-POST" href="#collapse-users-sessions-invalidate_all-POST">POST /users/sessions/invalidate_all</a></h4></div><div id="collapse-users-sessions-invalidate_all-POST" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-sessions-invalidate_all-POST"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTksIm5iZiI6MTUyMDg4NDE5OSwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.7USFKyn6vvuyiJs9xT_-pfX-La962_9UW4dDXtcBdY0"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUyOTksIm5iZiI6MTUyMDk3NTI5NywiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6IjAifQ.3NISsPAoIzA0OwbPnlZqqFXg8nv8UyoZX45onJ5f5lA"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ0OTksIm5iZiI6MTUyMDg4NDE5OSwiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6MH0.7USFKyn6vvuyiJs9xT_-pfX-La962_9UW4dDXtcBdY0"
-}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-3-albums-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-3-albums-GET" href="#collapse-users-3-albums-GET">GET /users/3/albums</a></h4></div><div id="collapse-users-3-albums-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-3-albums-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDQsIm5iZiI6MTUyMDg4NDIwNCwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.W53OW0qKwkJoGUjkUFEsCBBsgK6N9bumYOa3gCu7MNc"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUyOTksIm5iZiI6MTUyMDk3NTI5NywiZW1haWwiOiJhZG1pbkB3b2xveC5jb20uYXIiLCJ0b2tlbktleSI6IjAifQ.3NISsPAoIzA0OwbPnlZqqFXg8nv8UyoZX45onJ5f5lA"
+}</pre><h5>Body</h5><pre>{}</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-1-albums-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-1-albums-GET" href="#collapse-users-1-albums-GET">GET /users/1/albums</a></h4></div><div id="collapse-users-1-albums-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-1-albums-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUzMDMsIm5iZiI6MTUyMDk3NTMwMSwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOiIwIn0.JD9c_mO-u_hsWPSsq7MKsz59gTNEX7fjvmg2QTjG3v0"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDQsIm5iZiI6MTUyMDg4NDIwNCwiZW1haWwiOiJtYXJ0aW5Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.W53OW0qKwkJoGUjkUFEsCBBsgK6N9bumYOa3gCu7MNc"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUzMDMsIm5iZiI6MTUyMDk3NTMwMSwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOiIwIn0.JD9c_mO-u_hsWPSsq7MKsz59gTNEX7fjvmg2QTjG3v0"
 }</pre><h5>Body</h5><pre>[
   {
     "userId": 1,
@@ -74,9 +602,9 @@
     "title": "quidem molestiae enim"
   }
 ]</pre></div></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading-users-albums-5-photos-GET"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse-users-albums-5-photos-GET" href="#collapse-users-albums-5-photos-GET">GET /users/albums/5/photos</a></h4></div><div id="collapse-users-albums-5-photos-GET" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-users-albums-5-photos-GET"><div class="panel-body"><h4>Request Data</h4><div class="container"><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDYsIm5iZiI6MTUyMDg4NDIwNiwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.KrF3Pe5iBUR_ccjD7LsChH_dp3e_N1gC2JQNdnjn8ic"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUzMDUsIm5iZiI6MTUyMDk3NTMwMywiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOiIwIn0.96QuzPSkuB-M8OgB8Ub86zgUiDiEMDoZ2agOzg3ns2I"
 }</pre></div></div><div class="panel-body"><h4>Response Data</h4><div class="container"><h5>Status: 200</h5><h5>Headers</h5><pre>{
-  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA4ODQ1MDYsIm5iZiI6MTUyMDg4NDIwNiwiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOjB9.KrF3Pe5iBUR_ccjD7LsChH_dp3e_N1gC2JQNdnjn8ic"
+  "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjA5NzUzMDUsIm5iZiI6MTUyMDk3NTMwMywiZW1haWwiOiJjb21tb25Ad29sb3guY29tLmFyIiwidG9rZW5LZXkiOiIwIn0.96QuzPSkuB-M8OgB8Ub86zgUiDiEMDoZ2agOzg3ns2I"
 }</pre><h5>Body</h5><pre>[
   {
     "albumId": 5,
